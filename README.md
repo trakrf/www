@@ -9,6 +9,7 @@ Static marketing site built with Astro + Tailwind + TypeScript. Presents TrakRF'
 ## Architecture
 
 **Stack**:
+
 - Framework: Astro
 - Styling: Tailwind CSS
 - Language: TypeScript
@@ -21,11 +22,13 @@ This repository contains ONLY the marketing content (copy, images, layout). The 
 ## Development
 
 ### Prerequisites
+
 - Node.js 22+ (see .nvmrc)
 - pnpm 8.x
 - direnv (optional but recommended)
 
 ### Quick Start
+
 ```bash
 # Install dependencies
 pnpm install
@@ -38,6 +41,7 @@ pnpm build
 ```
 
 ## Project Structure
+
 ```
 www/
 ├── spec/              # Claude Spec Workflow specifications

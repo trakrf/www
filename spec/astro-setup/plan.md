@@ -8,6 +8,7 @@ Specification: spec.md
 This plan establishes a complete Astro + Tailwind CSS + TypeScript development environment for the trakrf.id marketing website. The goal is to prove the build toolchain works end-to-end with a Hello World page that validates DaisyUI integration, while keeping configuration minimal. Custom animations and theme extensions from trakrf-web will be deferred to the content migration phase to avoid unnecessary complexity.
 
 **Key Decisions from Clarification**:
+
 - Node.js 22 LTS (not 24) - no Noble dependency, more stable
 - Tailwind + DaisyUI for CSS framework (matches trakrf-web for easier migration)
 - Hello World page uses DaisyUI components to validate integration
@@ -20,6 +21,7 @@ This plan establishes a complete Astro + Tailwind CSS + TypeScript development e
 ## Relevant Files
 
 **Reference Patterns** (existing code to follow):
+
 - `/home/mike/mikestankavich.com/package.json` - Script patterns, packageManager setup, dependency versions
 - `/home/mike/mikestankavich.com/astro.config.mjs` - Astro + Tailwind integration pattern
 - `/home/mike/mikestankavich.com/tsconfig.json` - Strict TypeScript configuration
@@ -29,6 +31,7 @@ This plan establishes a complete Astro + Tailwind CSS + TypeScript development e
 - `/home/mike/trakrf-web/tailwind.config.js` - DaisyUI theme config reference (lines 60-67)
 
 **Files to Create**:
+
 - `/home/mike/www/package.json` - Project manifest with pnpm, scripts, dependencies
 - `/home/mike/www/astro.config.mjs` - Astro configuration with Tailwind integration
 - `/home/mike/www/tsconfig.json` - TypeScript strict mode configuration
@@ -41,6 +44,7 @@ This plan establishes a complete Astro + Tailwind CSS + TypeScript development e
 - `/home/mike/www/public/.gitkeep` - Ensure public directory exists in git
 
 **Files to Modify**:
+
 - `/home/mike/www/.nvmrc` - Update from "24" to "22"
 - `/home/mike/www/spec/stack.md` - Replace placeholder commands with actual Astro validation commands
 
@@ -56,11 +60,13 @@ This plan establishes a complete Astro + Tailwind CSS + TypeScript development e
 ## Task Breakdown
 
 ### Task 1: Update Node.js Version
+
 **File**: `/home/mike/www/.nvmrc`
 **Action**: MODIFY
 **Pattern**: Simple version string update
 
 **Implementation**:
+
 ```bash
 # Change from "24" to "22"
 echo "22" > /home/mike/www/.nvmrc
@@ -71,11 +77,13 @@ echo "22" > /home/mike/www/.nvmrc
 ---
 
 ### Task 2: Initialize pnpm and Create package.json
+
 **File**: `/home/mike/www/package.json`
 **Action**: CREATE
 **Pattern**: Reference `/home/mike/mikestankavich.com/package.json` for structure
 
 **Implementation**:
+
 ```json
 {
 	"name": "trakrf-www",
@@ -112,6 +120,7 @@ echo "22" > /home/mike/www/.nvmrc
 ```
 
 **Key Details**:
+
 - `packageManager: "pnpm@9.x.x"` - Corepack standard for version pinning
 - `dev` script runs `astro check --watch` in parallel with dev server (type checking)
 - `build` script runs `astro check` before building (validation gate)
@@ -123,16 +132,19 @@ echo "22" > /home/mike/www/.nvmrc
 ---
 
 ### Task 3: Install Dependencies
+
 **Action**: RUN
 **Pattern**: Standard pnpm install
 
 **Implementation**:
+
 ```bash
 cd /home/mike/www
 pnpm install
 ```
 
 **Validation**:
+
 - `node_modules/` directory created
 - `pnpm-lock.yaml` generated
 - No installation errors
@@ -140,11 +152,13 @@ pnpm install
 ---
 
 ### Task 4: Create Astro Configuration
+
 **File**: `/home/mike/www/astro.config.mjs`
 **Action**: CREATE
 **Pattern**: Reference `/home/mike/mikestankavich.com/astro.config.mjs` (simplified)
 
 **Implementation**:
+
 ```javascript
 import tailwind from '@astrojs/tailwind';
 import { defineConfig } from 'astro/config';
@@ -164,6 +178,7 @@ export default defineConfig({
 ```
 
 **Key Details**:
+
 - `site: 'https://trakrf.id'` - Production URL for sitemap/canonical URLs
 - `applyBaseStyles: true` - Required for DaisyUI to work properly
 - `output: 'static'` - Explicit static site generation (Cloudflare Pages compatible)
@@ -173,11 +188,13 @@ export default defineConfig({
 ---
 
 ### Task 5: Create TypeScript Configuration
+
 **File**: `/home/mike/www/tsconfig.json`
 **Action**: CREATE
 **Pattern**: Reference `/home/mike/mikestankavich.com/tsconfig.json` (strict mode)
 
 **Implementation**:
+
 ```json
 {
 	"extends": "astro/tsconfigs/strict",
@@ -212,6 +229,7 @@ export default defineConfig({
 ```
 
 **Key Details**:
+
 - Extends Astro's strict preset
 - Very strict TypeScript rules (matching mikestankavich.com)
 - Path alias `@/*` for cleaner imports
@@ -222,11 +240,13 @@ export default defineConfig({
 ---
 
 ### Task 6: Create Tailwind Configuration with DaisyUI
+
 **File**: `/home/mike/www/tailwind.config.mjs`
 **Action**: CREATE
 **Pattern**: Minimal config with DaisyUI plugin (reference trakrf-web themes)
 
 **Implementation**:
+
 ```javascript
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -243,6 +263,7 @@ export default {
 ```
 
 **Key Details**:
+
 - Minimal theme extensions (custom animations deferred to content migration)
 - DaisyUI plugin with light/dark themes (matches trakrf-web)
 - Standard Astro content paths
@@ -252,11 +273,13 @@ export default {
 ---
 
 ### Task 7: Create Prettier Configuration
+
 **File**: `/home/mike/www/.prettierrc`
 **Action**: CREATE
 **Pattern**: Reference `/home/mike/mikestankavich.com/.prettierrc`
 
 **Implementation**:
+
 ```json
 {
 	"useTabs": true,
@@ -269,6 +292,7 @@ export default {
 ```
 
 **Key Details**:
+
 - Tabs (matches .editorconfig)
 - Single quotes (Astro community standard)
 - prettier-plugin-tailwindcss auto-sorts Tailwind classes
@@ -279,11 +303,13 @@ export default {
 ---
 
 ### Task 8: Create Prettier Ignore File
+
 **File**: `/home/mike/www/.prettierignore`
 **Action**: CREATE
 **Pattern**: Reference `/home/mike/mikestankavich.com/.prettierignore`
 
 **Implementation**:
+
 ```
 node_modules/
 dist/
@@ -296,11 +322,13 @@ pnpm-lock.yaml
 ---
 
 ### Task 9: Create ESLint Configuration
+
 **File**: `/home/mike/www/eslint.config.js`
 **Action**: CREATE
 **Pattern**: Astro recommended ESLint setup (flat config format)
 
 **Implementation**:
+
 ```javascript
 import eslintPluginAstro from 'eslint-plugin-astro';
 
@@ -317,6 +345,7 @@ export default [
 ```
 
 **Key Details**:
+
 - Uses ESLint 9.x flat config format (modern standard)
 - Astro's recommended preset
 - Can be extended during content migration if needed
@@ -326,11 +355,13 @@ export default [
 ---
 
 ### Task 10: Create Astro Type Definitions
+
 **File**: `/home/mike/www/src/env.d.ts`
 **Action**: CREATE
 **Pattern**: Standard Astro type definitions
 
 **Implementation**:
+
 ```typescript
 /// <reference types="astro/client" />
 ```
@@ -340,11 +371,13 @@ export default [
 ---
 
 ### Task 11: Create Hello World Page with DaisyUI
+
 **File**: `/home/mike/www/src/pages/index.astro`
 **Action**: CREATE
 **Pattern**: Simple Astro page with DaisyUI components to validate integration
 
 **Implementation**:
+
 ```astro
 ---
 // Component script (runs at build time)
@@ -364,8 +397,8 @@ const pageTitle = 'TrakRF - Hello World';
 				<div class="max-w-md">
 					<h1 class="text-5xl font-bold">Hello World!</h1>
 					<p class="py-6">
-						TrakRF marketing website is ready for development. This page uses DaisyUI
-						components to validate Tailwind + DaisyUI integration.
+						TrakRF marketing website is ready for development. This page uses DaisyUI components to
+						validate Tailwind + DaisyUI integration.
 					</p>
 					<button class="btn btn-primary">Get Started</button>
 				</div>
@@ -376,12 +409,14 @@ const pageTitle = 'TrakRF - Hello World';
 ```
 
 **Key Details**:
+
 - Uses DaisyUI components: `hero`, `btn`, `btn-primary`
 - Uses DaisyUI theme colors: `bg-base-200`
 - Validates Tailwind utility classes work
 - Simple, semantic HTML structure
 
 **Validation**:
+
 - Page renders at http://localhost:4321
 - DaisyUI styles applied correctly
 - Button shows primary theme color
@@ -389,11 +424,13 @@ const pageTitle = 'TrakRF - Hello World';
 ---
 
 ### Task 12: Create Public Directory Placeholder
+
 **File**: `/home/mike/www/public/.gitkeep`
 **Action**: CREATE
 **Pattern**: Ensure public directory tracked in git
 
 **Implementation**:
+
 ```bash
 mkdir -p /home/mike/www/public
 touch /home/mike/www/public/.gitkeep
@@ -404,6 +441,7 @@ touch /home/mike/www/public/.gitkeep
 ---
 
 ### Task 13: Update spec/stack.md with Validation Commands
+
 **File**: `/home/mike/www/spec/stack.md`
 **Action**: MODIFY
 **Pattern**: Replace placeholder commands with actual Astro commands
@@ -411,7 +449,7 @@ touch /home/mike/www/public/.gitkeep
 **Implementation**:
 Replace entire file content with:
 
-```markdown
+````markdown
 # Stack: Astro + Tailwind + TypeScript
 
 > **Package Manager**: pnpm
@@ -424,13 +462,16 @@ Replace entire file content with:
 These commands are used by `/check` and `/ship` to validate code quality.
 
 ## Lint
+
 ```bash
 pnpm lint
 ```
+````
 
 Runs Prettier formatting and ESLint fixes. Must pass with no errors.
 
 ## Typecheck
+
 ```bash
 pnpm typecheck
 ```
@@ -438,6 +479,7 @@ pnpm typecheck
 Runs Astro's TypeScript checker. Must pass with no type errors.
 
 ## Test
+
 ```bash
 # No tests configured yet - will be added in future spec
 echo "✅ No tests to run (marketing site)"
@@ -447,6 +489,7 @@ exit 0
 Tests will be added when interactive features are implemented.
 
 ## Build
+
 ```bash
 pnpm build
 ```
@@ -456,9 +499,11 @@ Builds the static site. Must complete successfully with no errors.
 ---
 
 **Development Commands**:
+
 - `pnpm dev` - Start dev server with type checking
 - `pnpm preview` - Preview production build locally
-```
+
+````
 
 **Validation**:
 - Commands execute successfully
@@ -488,9 +533,10 @@ pnpm build
 
 # Gate 5: Dev server smoke test
 timeout 10s pnpm dev || true  # Start and auto-stop after 10s
-```
+````
 
 **Validation Criteria**:
+
 - ✅ Lint passes with no errors
 - ✅ Typecheck passes with no type errors
 - ✅ Build completes successfully
@@ -499,6 +545,7 @@ timeout 10s pnpm dev || true  # Start and auto-stop after 10s
 - ✅ DaisyUI styles render correctly
 
 **If any validation fails**:
+
 1. Check error output
 2. Fix the issue
 3. Re-run validation
@@ -536,12 +583,14 @@ timeout 10s pnpm dev || true  # Start and auto-stop after 10s
 **CRITICAL**: These are not suggestions - they are GATES that block progress.
 
 After EVERY code change, use commands from `spec/stack.md`:
+
 - **Gate 1**: Syntax & Style → `pnpm lint`
 - **Gate 2**: Type Safety → `pnpm typecheck`
 - **Gate 3**: Unit Tests → `echo "✅ No tests to run"`
 - **Gate 4**: Build Success → `pnpm build`
 
 **Enforcement Rules**:
+
 - If ANY gate fails → Fix immediately
 - Re-run validation after fix
 - Loop until ALL gates pass
@@ -552,6 +601,7 @@ After EVERY code change, use commands from `spec/stack.md`:
 ## Validation Sequence
 
 **After each task (1-13)**:
+
 ```bash
 # Quick validation
 pnpm lint
@@ -559,6 +609,7 @@ pnpm typecheck
 ```
 
 **Final validation (Task 14)**:
+
 ```bash
 # Full suite
 pnpm lint

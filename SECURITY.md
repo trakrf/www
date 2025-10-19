@@ -22,6 +22,7 @@ To report a security vulnerability, please use ONE of the following:
 ### What to Include
 
 Please provide:
+
 - Description of the vulnerability
 - Steps to reproduce
 - Potential impact
@@ -32,13 +33,14 @@ Please provide:
 - **Acknowledgment**: Within 48 hours
 - **Initial Assessment**: Within 5 business days
 - **Resolution Timeline**: Depends on severity
-    - Critical: 7-14 days
-    - High: 30 days
-    - Medium/Low: 90 days
+  - Critical: 7-14 days
+  - High: 30 days
+  - Medium/Low: 90 days
 
 ### Disclosure Policy
 
 We follow coordinated disclosure:
+
 1. Reporter submits vulnerability
 2. We validate and develop fix
 3. We release patched version
