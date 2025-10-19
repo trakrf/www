@@ -1,0 +1,94 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../../public/images/icon.png';
+
+const links = [
+	{ href: '/#pricing', label: 'Pricing' },
+	{ href: '/#faq', label: 'FAQ' },
+	{ href: 'https://handheld.trakrf.id', label: 'Read Tags' }
+];
+---
+
+<header class="bg-base-200">
+	<nav class="container mx-auto flex items-center justify-between px-8 py-4">
+		<!-- Logo -->
+		<div class="flex lg:flex-1">
+			<a href="/" class="-m-1.5 p-1.5">
+				<Image src={logo} alt="TrakRF" class="w-8" />
+			</a>
+		</div>
+
+		<!-- Desktop Navigation -->
+		<div class="hidden lg:flex lg:items-center lg:justify-center lg:gap-12">
+			{
+				links.map((link) => (
+					<a href={link.href} class="link-hover link">
+						{link.label}
+					</a>
+				))
+			}
+		</div>
+
+		<!-- Desktop CTA -->
+		<div class="hidden lg:flex lg:flex-1 lg:justify-end">
+			<a href="#signin" class="btn btn-primary">Sign In</a>
+		</div>
+
+		<!-- Mobile menu button (stubbed - non-functional in Phase 1) -->
+		<div class="flex lg:hidden">
+			<button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5">
+				<span class="sr-only">Open main menu</span>
+				<svg
+					class="h-6 w-6 text-base-content"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+				</svg>
+			</button>
+		</div>
+	</nav>
+
+	<!-- Mobile menu panel (stubbed - hidden in Phase 1, will be functional in Phase 2) -->
+	<div class="hidden lg:hidden">
+		<div
+			class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-base-200 px-8 py-4 sm:max-w-sm sm:ring-1 sm:ring-neutral/10"
+		>
+			<div class="flex items-center justify-between">
+				<a href="/" class="-m-1.5 p-1.5">
+					<Image src={logo} alt="TrakRF" class="w-8" />
+				</a>
+				<button type="button" class="-m-2.5 rounded-md p-2.5">
+					<span class="sr-only">Close menu</span>
+					<svg
+						class="h-6 w-6 text-base-content"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						stroke="currentColor"
+					>
+						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+					</svg>
+				</button>
+			</div>
+			<div class="mt-6 flow-root">
+				<div class="flex flex-col items-start gap-y-4">
+					{
+						links.map((link) => (
+							<a href={link.href} class="link-hover link">
+								{link.label}
+							</a>
+						))
+					}
+					<div class="divider"></div>
+					<a href="#signin" class="btn btn-primary w-full">Sign In</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
