@@ -82,24 +82,28 @@ Migrate all 7 homepage marketing components:
 ### Styling Migration
 
 **Tailwind Configuration** (from `/home/mike/trakrf-web/tailwind.config.js`):
+
 - Copy custom animations: opacity, appearFromRight, wiggle, popup, shimmer
 - Copy custom gradient: `linear-gradient(60deg, #f79533, #f37055...)`
 - Merge with existing `tailwind.config.mjs`
 - Preserve all Tailwind classes exactly as-is
 
 **Global CSS** (from `/home/mike/trakrf-web/app/globals.css`):
+
 - Copy `.btn-gradient` class with shimmer animation
 - Copy smooth scroll behavior
 - Copy button capitalization override
 - Merge into Astro global CSS
 
 **DaisyUI**:
+
 - Already configured (light/dark themes)
 - Verify all DaisyUI components used: `.btn`, `.badge`, `.hero`, `.link`, `.divider`, `.collapse`
 
 ### Image Asset Migration
 
 **Download to `public/images/`**:
+
 1. Hero/CTA Unsplash image: `https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2...`
 2. Features accordion image (if used)
 3. Local logo: `/home/mike/trakrf-web/app/icon.png`
@@ -108,6 +112,7 @@ Migrate all 7 homepage marketing components:
 6. Author avatar: `/home/mike/trakrf-web/app/blog/_assets/images/authors/marc.png`
 
 **Skip unused**:
+
 - `how-it-works.svg` (appears unused in components)
 
 **Use Astro Image component** for optimization where applicable
@@ -115,6 +120,7 @@ Migrate all 7 homepage marketing components:
 ### Interactivity Strategy
 
 **Client-side JavaScript needed for**:
+
 - FeaturesAccordion expand/collapse
 - FAQ accordion expand/collapse
 - Header mobile menu toggle
@@ -122,6 +128,7 @@ Migrate all 7 homepage marketing components:
 - Scroll-to-pricing button
 
 **Approach**:
+
 - Use **Alpine.js** (lightweight, Tailwind-friendly) OR vanilla JS
 - Avoid React/heavy frameworks (defeats Astro static purpose)
 - Keep bundle size minimal
@@ -130,12 +137,14 @@ Migrate all 7 homepage marketing components:
 ### Content Cleanup
 
 **Find and replace throughout all migrated content**:
+
 - `shipfa.st` → `trakrf.id`
 - `marc` (author/person references) → `TrakRF Team` (or appropriate context)
 - `marc@shipfa.st` → `admin@trakrf.id`
 - Any other shipfa.st template remnants → TrakRF equivalents
 
 This applies to:
+
 - Legal pages (Privacy Policy, Terms of Service)
 - Blog posts (author references, example content)
 - Footer links
@@ -145,11 +154,13 @@ This applies to:
 ### Pricing Updates
 
 **Change from template pricing to production pricing**:
+
 - **Starter**: $97 (was $19 in template)
 - **Advanced**: $297 (was $69 in template) - Keep as featured plan
 - **Enterprise**: "Call" (unchanged)
 
 Update pricing display in:
+
 - Pricing component
 - Any pricing references in copy
 - Metadata/configuration if applicable
@@ -157,11 +168,13 @@ Update pricing display in:
 ### Link Stubbing
 
 **Stub these links** (point to placeholders):
+
 - "Sign In" button → `#signin` (no modal, just anchor for now)
 - Dashboard links → `#dashboard` (future: app.trakrf.id)
 - Checkout buttons → `#checkout` (no Stripe yet)
 
 **Active links**:
+
 - "Read Tags" → `https://handheld.trakrf.id`
 - Support email → `mailto:support@trakrf.id`
 - Legal pages → `/privacy-policy`, `/tos`
@@ -171,6 +184,7 @@ Update pricing display in:
 ### Page Structure
 
 Create Astro pages:
+
 - `src/pages/index.astro` - Homepage (replaces Hello World)
 - `src/pages/blog/index.astro` - Blog listing
 - `src/pages/blog/[slug].astro` - Individual blog posts (3 posts)
@@ -178,6 +192,7 @@ Create Astro pages:
 - `src/pages/tos.astro` - Terms of service
 
 Create Astro components (in `src/components/`):
+
 - `Header.astro`
 - `Hero.astro`
 - `Problem.astro`
@@ -190,20 +205,24 @@ Create Astro components (in `src/components/`):
 ### Configuration Files
 
 **Update `astro.config.mjs`**:
+
 - Verify no changes needed (static output already configured)
 
 **Update `tailwind.config.mjs`**:
+
 - Add custom animations from trakrf-web
 - Add custom gradient
 - Keep existing DaisyUI setup
 
 **Create `src/styles/global.css`**:
+
 - Import Tailwind directives
 - Add custom classes from trakrf-web globals.css
 
 ## Validation Criteria
 
 ### Visual Parity
+
 - [ ] Homepage renders identically to trakrf-web (side-by-side comparison)
 - [ ] All 7 marketing sections present and styled correctly
 - [ ] Responsive design works (mobile, tablet, desktop)
@@ -211,6 +230,7 @@ Create Astro components (in `src/components/`):
 - [ ] Fonts, colors, spacing match original
 
 ### Functional Parity
+
 - [ ] FeaturesAccordion expands/collapses on click
 - [ ] FAQ accordion expands/collapses on click
 - [ ] Mobile menu opens/closes
@@ -218,12 +238,14 @@ Create Astro components (in `src/components/`):
 - [ ] All links navigate correctly (including stubs)
 
 ### Multi-Page Structure
+
 - [ ] Blog index page lists 3 posts
 - [ ] Individual blog posts accessible via /blog/[slug]
 - [ ] Legal pages accessible at /privacy-policy and /tos
 - [ ] Navigation between pages works
 
 ### Build & Performance
+
 - [ ] `pnpm build` completes successfully
 - [ ] Static output in dist/ contains all pages
 - [ ] No console errors in browser
@@ -231,12 +253,14 @@ Create Astro components (in `src/components/`):
 - [ ] Bundle size reasonable (< 100KB JS for interactivity)
 
 ### Code Quality
+
 - [ ] All validation gates pass (lint, typecheck, build)
 - [ ] No hardcoded localhost URLs
 - [ ] Alt text on all images
 - [ ] Semantic HTML structure
 
 ### Content Accuracy
+
 - [ ] No shipfa.st references remain in content
 - [ ] No "marc" or marc@shipfa.st references remain
 - [ ] All emails use trakrf.id domain

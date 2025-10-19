@@ -1,0 +1,62 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../../public/images/icon.png';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t border-base-content/10 bg-base-200">
+	<div class="mx-auto max-w-7xl px-8 py-24">
+		<div class="flex flex-col flex-wrap md:flex-row md:flex-nowrap lg:items-start">
+			<!-- Logo and Description -->
+			<div class="mx-auto w-64 flex-shrink-0 text-center md:mx-0 md:text-left">
+				<a href="/" class="flex items-center justify-center gap-2 md:justify-start">
+					<Image src={logo} alt="TrakRF logo" class="h-6 w-6" />
+					<strong class="text-base font-extrabold tracking-tight md:text-lg"> TrakRF </strong>
+				</a>
+				<p class="mt-3 text-sm text-base-content/80">RFID right now: read tags today!</p>
+				<p class="mt-3 text-sm text-base-content/60">
+					Copyright © {currentYear} - All rights reserved
+				</p>
+			</div>
+
+			<!-- Links Columns -->
+			<div
+				class="-mb-10 mt-10 flex flex-grow flex-wrap justify-center text-center md:mt-0 md:pl-20 md:text-left"
+			>
+				<!-- Column 1: Links -->
+				<div class="w-full px-4 md:w-1/2 lg:w-1/3">
+					<div
+						class="footer-title mb-3 text-sm font-semibold tracking-widest text-base-content md:text-left"
+					>
+						LINKS
+					</div>
+					<div class="mb-10 flex flex-col items-center justify-center gap-2 text-sm md:items-start">
+						<a
+							href="mailto:support@trakrf.id"
+							target="_blank"
+							class="link-hover link"
+							aria-label="Contact Support"
+						>
+							Support
+						</a>
+						<a href="/#pricing" class="link-hover link"> Pricing </a>
+					</div>
+				</div>
+
+				<!-- Column 2: Legal -->
+				<div class="w-full px-4 md:w-1/2 lg:w-1/3">
+					<div
+						class="footer-title mb-3 text-sm font-semibold tracking-widest text-base-content md:text-left"
+					>
+						LEGAL
+					</div>
+					<div class="mb-10 flex flex-col items-center justify-center gap-2 text-sm md:items-start">
+						<a href="/tos" class="link-hover link"> Terms of services </a>
+						<a href="/privacy-policy" class="link-hover link"> Privacy policy </a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>

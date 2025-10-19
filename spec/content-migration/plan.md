@@ -10,6 +10,7 @@ This plan implements **Phase 1 of 3** for migrating trakrf-web marketing content
 **Phase 1 Goal**: Get a visually accurate static homepage on screen with proper Tailwind styling, image assets organized, and foundation ready for interactivity in Phase 2.
 
 **Key Decisions**:
+
 - Using Astro `<Image>` component for optimization
 - Header HTML structure complete but menu toggle stubbed (non-functional until Phase 2)
 - Custom gradient added to global.css (simpler than Tailwind utility)
@@ -21,21 +22,26 @@ This plan implements **Phase 1 of 3** for migrating trakrf-web marketing content
 ### Reference Patterns (existing code to follow):
 
 **Tailwind Configuration**:
+
 - `/home/mike/trakrf-web/tailwind.config.js` (lines 10-67) - Custom animations, keyframes, gradient, DaisyUI config
 
 **Global CSS**:
+
 - `/home/mike/trakrf-web/app/globals.css` (lines 5-21) - Smooth scroll, `.btn-gradient`, `.btn` capitalization
 
 **Component Copy & Structure**:
+
 - `/home/mike/trakrf-web/components/Header.tsx` (195 lines) - Navigation links, logo, mobile menu HTML
 - `/home/mike/trakrf-web/components/Hero.tsx` (48 lines) - Headline, subheading, image, layout
 - `/home/mike/trakrf-web/components/Problem.tsx` (69 lines) - 3-step journey, Arrow SVG, emoji steps
 - `/home/mike/trakrf-web/components/Footer.tsx` (118 lines) - Logo, links, copyright, layout
 
 **Configuration**:
+
 - `/home/mike/trakrf-web/config.ts` (lines 4-115) - App metadata, email config, domain
 
 **Assets**:
+
 - `/home/mike/trakrf-web/app/icon.png` - Logo (24KB)
 - `/home/mike/trakrf-web/app/opengraph-image.png` - OG image (33.6KB)
 - `/home/mike/trakrf-web/app/twitter-image.png` - Twitter card (33.6KB)
@@ -43,18 +49,22 @@ This plan implements **Phase 1 of 3** for migrating trakrf-web marketing content
 ### Files to Create:
 
 **Configuration & Styles** (Phase 1):
+
 - `src/styles/global.css` - Global CSS with Tailwind imports, smooth scroll, custom classes
 
 **Components** (Phase 1):
+
 - `src/components/Header.astro` - Navigation with stubbed mobile menu
 - `src/components/Hero.astro` - Main hero section
 - `src/components/Problem.astro` - Problem agitation section with Arrow SVG
 - `src/components/Footer.astro` - Site footer
 
 **Pages** (Phase 1):
+
 - `src/pages/index.astro` - Homepage layout importing 4 components
 
 **Assets** (Phase 1):
+
 - `public/images/hero.jpg` - Downloaded Unsplash hero image
 - `public/images/icon.png` - Logo
 - `public/images/opengraph-image.png` - OG image
@@ -63,11 +73,13 @@ This plan implements **Phase 1 of 3** for migrating trakrf-web marketing content
 ### Files to Modify:
 
 **Configuration** (Phase 1):
+
 - `tailwind.config.mjs` (add custom animations, keyframes, gradient to theme.extend)
 - `astro.config.mjs` (verify - likely no changes needed)
 - `src/env.d.ts` (verify - likely no changes needed)
 
 **To Delete** (Phase 1):
+
 - `src/pages/index.astro` - Current Hello World page (replace with new homepage)
 
 ## Architecture Impact
@@ -75,9 +87,11 @@ This plan implements **Phase 1 of 3** for migrating trakrf-web marketing content
 **Subsystems affected**: Frontend/UI only
 
 **New dependencies**:
+
 - None for Phase 1 (Alpine.js deferred to Phase 2)
 
 **Breaking changes**:
+
 - Replaces Hello World homepage with marketing content
 
 ## Phase 1 Task Breakdown
@@ -130,6 +144,7 @@ keyframes: {
 ```
 
 **Validation**:
+
 - Run `pnpm lint` to verify no syntax errors
 - Verify animations are accessible in browser DevTools
 
@@ -151,42 +166,55 @@ keyframes: {
 /* Smooth scroll behavior */
 html,
 body {
-  scroll-behavior: smooth !important;
+	scroll-behavior: smooth !important;
 }
 
 /* Progress bar transition */
 progress::-webkit-progress-value {
-  transition: 0.6s width ease-out;
+	transition: 0.6s width ease-out;
 }
 
 /* Custom gradient button with shimmer */
 .btn-gradient {
-  background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
-  background-size: 300% 300%;
-  animation: shimmer 3s ease-out infinite alternate;
-  border: 0;
-  border-color: transparent;
-  color: white;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  transition-duration: 100ms;
+	background: linear-gradient(
+		60deg,
+		#f79533,
+		#f37055,
+		#ef4e7b,
+		#a166ab,
+		#5073b8,
+		#1098ad,
+		#07b39b,
+		#6fba82
+	);
+	background-size: 300% 300%;
+	animation: shimmer 3s ease-out infinite alternate;
+	border: 0;
+	border-color: transparent;
+	color: white;
+	box-shadow:
+		0 1px 3px 0 rgb(0 0 0 / 0.1),
+		0 1px 2px -1px rgb(0 0 0 / 0.1);
+	transition-duration: 100ms;
 }
 
 .btn-gradient:hover {
-  filter: saturate(1.2);
+	filter: saturate(1.2);
 }
 
 .btn-gradient:disabled {
-  background: rgb(107 114 128 / 0.3);
-  animation: none;
+	background: rgb(107 114 128 / 0.3);
+	animation: none;
 }
 
 /* Override DaisyUI button capitalization */
 .btn {
-  text-transform: capitalize !important;
+	text-transform: capitalize !important;
 }
 ```
 
 **Then import in `src/pages/index.astro`**:
+
 ```astro
 ---
 import '../styles/global.css';
@@ -194,6 +222,7 @@ import '../styles/global.css';
 ```
 
 **Validation**:
+
 - Run `pnpm build` to verify CSS compiles
 - Check browser for smooth scroll and custom classes
 
@@ -222,12 +251,14 @@ cp /home/mike/trakrf-web/app/twitter-image.png public/images/twitter-image.png
 ```
 
 **Assets to download**:
+
 1. `hero.jpg` - Main hero image (Unsplash)
 2. `icon.png` - Logo (24KB)
 3. `opengraph-image.png` - OG share image (33.6KB)
 4. `twitter-image.png` - Twitter card (33.6KB)
 
 **Validation**:
+
 - Verify all 4 images exist in `public/images/`
 - Check file sizes are reasonable (hero.jpg should be < 500KB)
 
@@ -247,77 +278,99 @@ import { Image } from 'astro:assets';
 import logo from '../../public/images/icon.png';
 
 const links = [
-  { href: '/#pricing', label: 'Pricing' },
-  { href: '/#faq', label: 'FAQ' },
-  { href: 'https://handheld.trakrf.id', label: 'Read Tags' },
+	{ href: '/#pricing', label: 'Pricing' },
+	{ href: '/#faq', label: 'FAQ' },
+	{ href: 'https://handheld.trakrf.id', label: 'Read Tags' }
 ];
 ---
 
 <header class="bg-base-200">
-  <nav class="container mx-auto flex items-center justify-between px-8 py-4">
-    <!-- Logo -->
-    <div class="flex lg:flex-1">
-      <a href="/" class="-m-1.5 p-1.5">
-        <Image src={logo} alt="TrakRF" class="w-8" />
-      </a>
-    </div>
+	<nav class="container mx-auto flex items-center justify-between px-8 py-4">
+		<!-- Logo -->
+		<div class="flex lg:flex-1">
+			<a href="/" class="-m-1.5 p-1.5">
+				<Image src={logo} alt="TrakRF" class="w-8" />
+			</a>
+		</div>
 
-    <!-- Desktop Navigation -->
-    <div class="hidden lg:flex lg:justify-center lg:gap-12 lg:items-center">
-      {links.map((link) => (
-        <a href={link.href} class="link link-hover">
-          {link.label}
-        </a>
-      ))}
-    </div>
+		<!-- Desktop Navigation -->
+		<div class="hidden lg:flex lg:items-center lg:justify-center lg:gap-12">
+			{
+				links.map((link) => (
+					<a href={link.href} class="link-hover link">
+						{link.label}
+					</a>
+				))
+			}
+		</div>
 
-    <!-- Desktop CTA -->
-    <div class="hidden lg:flex lg:justify-end lg:flex-1">
-      <a href="#signin" class="btn btn-primary">Sign In</a>
-    </div>
+		<!-- Desktop CTA -->
+		<div class="hidden lg:flex lg:flex-1 lg:justify-end">
+			<a href="#signin" class="btn btn-primary">Sign In</a>
+		</div>
 
-    <!-- Mobile menu button (stubbed - non-functional in Phase 1) -->
-    <div class="flex lg:hidden">
-      <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5">
-        <span class="sr-only">Open main menu</span>
-        <svg class="w-6 h-6 text-base-content" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-        </svg>
-      </button>
-    </div>
-  </nav>
+		<!-- Mobile menu button (stubbed - non-functional in Phase 1) -->
+		<div class="flex lg:hidden">
+			<button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5">
+				<span class="sr-only">Open main menu</span>
+				<svg
+					class="h-6 w-6 text-base-content"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+				</svg>
+			</button>
+		</div>
+	</nav>
 
-  <!-- Mobile menu panel (stubbed - hidden in Phase 1, will be functional in Phase 2) -->
-  <div class="hidden lg:hidden">
-    <div class="fixed inset-y-0 right-0 z-10 w-full px-8 py-4 overflow-y-auto bg-base-200 sm:max-w-sm sm:ring-1 sm:ring-neutral/10">
-      <div class="flex items-center justify-between">
-        <a href="/" class="-m-1.5 p-1.5">
-          <Image src={logo} alt="TrakRF" class="w-8" />
-        </a>
-        <button type="button" class="-m-2.5 rounded-md p-2.5">
-          <span class="sr-only">Close menu</span>
-          <svg class="w-6 h-6 text-base-content" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-      <div class="flow-root mt-6">
-        <div class="flex flex-col gap-y-4 items-start">
-          {links.map((link) => (
-            <a href={link.href} class="link link-hover">
-              {link.label}
-            </a>
-          ))}
-          <div class="divider"></div>
-          <a href="#signin" class="btn btn-primary w-full">Sign In</a>
-        </div>
-      </div>
-    </div>
-  </div>
+	<!-- Mobile menu panel (stubbed - hidden in Phase 1, will be functional in Phase 2) -->
+	<div class="hidden lg:hidden">
+		<div
+			class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-base-200 px-8 py-4 sm:max-w-sm sm:ring-1 sm:ring-neutral/10"
+		>
+			<div class="flex items-center justify-between">
+				<a href="/" class="-m-1.5 p-1.5">
+					<Image src={logo} alt="TrakRF" class="w-8" />
+				</a>
+				<button type="button" class="-m-2.5 rounded-md p-2.5">
+					<span class="sr-only">Close menu</span>
+					<svg
+						class="h-6 w-6 text-base-content"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						stroke="currentColor"
+					>
+						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+					</svg>
+				</button>
+			</div>
+			<div class="mt-6 flow-root">
+				<div class="flex flex-col items-start gap-y-4">
+					{
+						links.map((link) => (
+							<a href={link.href} class="link-hover link">
+								{link.label}
+							</a>
+						))
+					}
+					<div class="divider"></div>
+					<a href="#signin" class="btn btn-primary w-full">Sign In</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </header>
 ```
 
 **Key details**:
+
 - Mobile menu HTML is present but hidden with `class="hidden"`
 - Button click handlers stubbed (will add in Phase 2)
 - Uses Astro Image component for logo optimization
@@ -325,6 +378,7 @@ const links = [
 - "Read Tags" points to handheld.trakrf.id (active link)
 
 **Validation**:
+
 - Component renders without errors
 - Desktop nav visible on large screens
 - Mobile button visible on small screens (non-functional expected)
@@ -346,40 +400,43 @@ import { Image } from 'astro:assets';
 import heroImage from '../../public/images/hero.jpg';
 ---
 
-<section class="max-w-7xl mx-auto bg-base-100 flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-20 px-8 py-8 lg:py-20">
-  <!-- Text Content -->
-  <div class="flex flex-col gap-10 lg:gap-14 items-center justify-center text-center lg:text-left lg:items-start">
-    <h1 class="font-extrabold text-3xl lg:text-5xl tracking-tight md:-mb-4">
-      Track Tags Today!
-    </h1>
-    <p class="text-lg opacity-80 leading-relaxed">
-      The RFID tracking solution that will have you tracking all the things all the time in no time at all!
-    </p>
-    <a href="#signin" class="btn btn-primary btn-wide">
-      Get Started
-    </a>
-  </div>
+<section
+	class="mx-auto flex max-w-7xl flex-col items-center justify-center gap-16 bg-base-100 px-8 py-8 lg:flex-row lg:gap-20 lg:py-20"
+>
+	<!-- Text Content -->
+	<div
+		class="flex flex-col items-center justify-center gap-10 text-center lg:items-start lg:gap-14 lg:text-left"
+	>
+		<h1 class="text-3xl font-extrabold tracking-tight md:-mb-4 lg:text-5xl">Track Tags Today!</h1>
+		<p class="text-lg leading-relaxed opacity-80">
+			The RFID tracking solution that will have you tracking all the things all the time in no time
+			at all!
+		</p>
+		<a href="#signin" class="btn btn-primary btn-wide"> Get Started </a>
+	</div>
 
-  <!-- Hero Image -->
-  <div class="lg:w-full">
-    <Image
-      src={heroImage}
-      alt="RFID tracking technology - computers and electronics"
-      class="w-full rounded-lg"
-      widths={[400, 800, 1200]}
-      sizes="(max-width: 768px) 100vw, 50vw"
-    />
-  </div>
+	<!-- Hero Image -->
+	<div class="lg:w-full">
+		<Image
+			src={heroImage}
+			alt="RFID tracking technology - computers and electronics"
+			class="w-full rounded-lg"
+			widths={[400, 800, 1200]}
+			sizes="(max-width: 768px) 100vw, 50vw"
+		/>
+	</div>
 </section>
 ```
 
 **Key details**:
+
 - Exact copy from trakrf-web (lines 25-30)
 - Astro Image with responsive widths for optimization
 - Button links to #signin (stub)
 - Flexbox layout: stacked mobile, side-by-side desktop
 
 **Validation**:
+
 - Hero section renders with correct layout
 - Image loads and displays
 - Text is legible and styled correctly
@@ -397,58 +454,85 @@ import heroImage from '../../public/images/hero.jpg';
 
 ```astro
 <section class="bg-neutral text-neutral-content">
-  <div class="max-w-7xl mx-auto px-8 py-16 md:py-32 text-center">
-    <!-- Headline -->
-    <h2 class="max-w-3xl mx-auto font-extrabold text-3xl md:text-4xl tracking-tight mb-6 md:mb-8">
-      80% of RFID projects never launch
-    </h2>
+	<div class="mx-auto max-w-7xl px-8 py-16 text-center md:py-32">
+		<!-- Headline -->
+		<h2 class="mx-auto mb-6 max-w-3xl text-3xl font-extrabold tracking-tight md:mb-8 md:text-4xl">
+			80% of RFID projects never launch
+		</h2>
 
-    <!-- Subheading -->
-    <p class="max-w-xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-20">
-      Network, firmware, configuration, middleware, so many details...
-    </p>
+		<!-- Subheading -->
+		<p class="mx-auto mb-12 max-w-xl text-lg leading-relaxed opacity-90 md:mb-20">
+			Network, firmware, configuration, middleware, so many details...
+		</p>
 
-    <!-- 3-Step Journey -->
-    <div class="flex flex-col md:flex-row justify-center items-center md:items-start gap-6">
-      <!-- Step 1 -->
-      <div class="w-full md:w-48 flex flex-col gap-2 items-center justify-center">
-        <span class="text-4xl">🧑‍💻</span>
-        <h3 class="font-bold">12 hours in, still haven't read your first tag</h3>
-      </div>
+		<!-- 3-Step Journey -->
+		<div class="flex flex-col items-center justify-center gap-6 md:flex-row md:items-start">
+			<!-- Step 1 -->
+			<div class="flex w-full flex-col items-center justify-center gap-2 md:w-48">
+				<span class="text-4xl">🧑‍💻</span>
+				<h3 class="font-bold">12 hours in, still haven't read your first tag</h3>
+			</div>
 
-      <!-- Arrow 1 -->
-      <svg class="shrink-0 w-12 fill-neutral-content opacity-70 max-md:-scale-x-100 md:rotate-90" viewBox="0 0 138 138" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g>
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M72.9644 5.31431C98.8774 43.8211 83.3812 88.048 54.9567 120.735C54.4696 121.298 54.5274 122.151 55.0896 122.639C55.6518 123.126 56.5051 123.068 56.9922 122.506C86.2147 88.9044 101.84 43.3918 75.2003 3.80657C74.7866 3.18904 73.9486 3.02602 73.3287 3.44222C72.7113 3.85613 72.5484 4.69426 72.9644 5.31431Z"/>
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M56.5084 121.007C56.9835 118.685 57.6119 115.777 57.6736 115.445C59.3456 106.446 59.5323 97.67 58.4433 88.5628C58.3558 87.8236 57.6824 87.2948 56.9433 87.3824C56.2042 87.4699 55.6756 88.1435 55.7631 88.8828C56.8219 97.7138 56.6432 106.225 55.0203 114.954C54.926 115.463 53.5093 121.999 53.3221 123.342C53.2427 123.893 53.3688 124.229 53.4061 124.305C53.5887 124.719 53.8782 124.911 54.1287 125.015C54.4123 125.13 54.9267 125.205 55.5376 124.926C56.1758 124.631 57.3434 123.699 57.6571 123.487C62.3995 120.309 67.4155 116.348 72.791 113.634C77.9171 111.045 83.3769 109.588 89.255 111.269C89.9704 111.475 90.7181 111.057 90.9235 110.342C91.1288 109.626 90.7117 108.878 89.9963 108.673C83.424 106.794 77.3049 108.33 71.5763 111.223C66.2328 113.922 61.2322 117.814 56.5084 121.007Z"/>
-        </g>
-      </svg>
+			<!-- Arrow 1 -->
+			<svg
+				class="w-12 shrink-0 fill-neutral-content opacity-70 max-md:-scale-x-100 md:rotate-90"
+				viewBox="0 0 138 138"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<g>
+					<path
+						fill-rule="evenodd"
+						clip-rule="evenodd"
+						d="M72.9644 5.31431C98.8774 43.8211 83.3812 88.048 54.9567 120.735C54.4696 121.298 54.5274 122.151 55.0896 122.639C55.6518 123.126 56.5051 123.068 56.9922 122.506C86.2147 88.9044 101.84 43.3918 75.2003 3.80657C74.7866 3.18904 73.9486 3.02602 73.3287 3.44222C72.7113 3.85613 72.5484 4.69426 72.9644 5.31431Z"
+					></path>
+					<path
+						fill-rule="evenodd"
+						clip-rule="evenodd"
+						d="M56.5084 121.007C56.9835 118.685 57.6119 115.777 57.6736 115.445C59.3456 106.446 59.5323 97.67 58.4433 88.5628C58.3558 87.8236 57.6824 87.2948 56.9433 87.3824C56.2042 87.4699 55.6756 88.1435 55.7631 88.8828C56.8219 97.7138 56.6432 106.225 55.0203 114.954C54.926 115.463 53.5093 121.999 53.3221 123.342C53.2427 123.893 53.3688 124.229 53.4061 124.305C53.5887 124.719 53.8782 124.911 54.1287 125.015C54.4123 125.13 54.9267 125.205 55.5376 124.926C56.1758 124.631 57.3434 123.699 57.6571 123.487C62.3995 120.309 67.4155 116.348 72.791 113.634C77.9171 111.045 83.3769 109.588 89.255 111.269C89.9704 111.475 90.7181 111.057 90.9235 110.342C91.1288 109.626 90.7117 108.878 89.9963 108.673C83.424 106.794 77.3049 108.33 71.5763 111.223C66.2328 113.922 61.2322 117.814 56.5084 121.007Z"
+					></path>
+				</g>
+			</svg>
 
-      <!-- Step 2 -->
-      <div class="w-full md:w-48 flex flex-col gap-2 items-center justify-center">
-        <span class="text-4xl">😮‍💨</span>
-        <h3 class="font-bold">No idea which detail you missed</h3>
-      </div>
+			<!-- Step 2 -->
+			<div class="flex w-full flex-col items-center justify-center gap-2 md:w-48">
+				<span class="text-4xl">😮‍💨</span>
+				<h3 class="font-bold">No idea which detail you missed</h3>
+			</div>
 
-      <!-- Arrow 2 -->
-      <svg class="shrink-0 w-12 fill-neutral-content opacity-70 max-md:-scale-x-100 md:rotate-90" viewBox="0 0 138 138" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g>
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M72.9644 5.31431C98.8774 43.8211 83.3812 88.048 54.9567 120.735C54.4696 121.298 54.5274 122.151 55.0896 122.639C55.6518 123.126 56.5051 123.068 56.9922 122.506C86.2147 88.9044 101.84 43.3918 75.2003 3.80657C74.7866 3.18904 73.9486 3.02602 73.3287 3.44222C72.7113 3.85613 72.5484 4.69426 72.9644 5.31431Z"/>
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M56.5084 121.007C56.9835 118.685 57.6119 115.777 57.6736 115.445C59.3456 106.446 59.5323 97.67 58.4433 88.5628C58.3558 87.8236 57.6824 87.2948 56.9433 87.3824C56.2042 87.4699 55.6756 88.1435 55.7631 88.8828C56.8219 97.7138 56.6432 106.225 55.0203 114.954C54.926 115.463 53.5093 121.999 53.3221 123.342C53.2427 123.893 53.3688 124.229 53.4061 124.305C53.5887 124.719 53.8782 124.911 54.1287 125.015C54.4123 125.13 54.9267 125.205 55.5376 124.926C56.1758 124.631 57.3434 123.699 57.6571 123.487C62.3995 120.309 67.4155 116.348 72.791 113.634C77.9171 111.045 83.3769 109.588 89.255 111.269C89.9704 111.475 90.7181 111.057 90.9235 110.342C91.1288 109.626 90.7117 108.878 89.9963 108.673C83.424 106.794 77.3049 108.33 71.5763 111.223C66.2328 113.922 61.2322 117.814 56.5084 121.007Z"/>
-        </g>
-      </svg>
+			<!-- Arrow 2 -->
+			<svg
+				class="w-12 shrink-0 fill-neutral-content opacity-70 max-md:-scale-x-100 md:rotate-90"
+				viewBox="0 0 138 138"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<g>
+					<path
+						fill-rule="evenodd"
+						clip-rule="evenodd"
+						d="M72.9644 5.31431C98.8774 43.8211 83.3812 88.048 54.9567 120.735C54.4696 121.298 54.5274 122.151 55.0896 122.639C55.6518 123.126 56.5051 123.068 56.9922 122.506C86.2147 88.9044 101.84 43.3918 75.2003 3.80657C74.7866 3.18904 73.9486 3.02602 73.3287 3.44222C72.7113 3.85613 72.5484 4.69426 72.9644 5.31431Z"
+					></path>
+					<path
+						fill-rule="evenodd"
+						clip-rule="evenodd"
+						d="M56.5084 121.007C56.9835 118.685 57.6119 115.777 57.6736 115.445C59.3456 106.446 59.5323 97.67 58.4433 88.5628C58.3558 87.8236 57.6824 87.2948 56.9433 87.3824C56.2042 87.4699 55.6756 88.1435 55.7631 88.8828C56.8219 97.7138 56.6432 106.225 55.0203 114.954C54.926 115.463 53.5093 121.999 53.3221 123.342C53.2427 123.893 53.3688 124.229 53.4061 124.305C53.5887 124.719 53.8782 124.911 54.1287 125.015C54.4123 125.13 54.9267 125.205 55.5376 124.926C56.1758 124.631 57.3434 123.699 57.6571 123.487C62.3995 120.309 67.4155 116.348 72.791 113.634C77.9171 111.045 83.3769 109.588 89.255 111.269C89.9704 111.475 90.7181 111.057 90.9235 110.342C91.1288 109.626 90.7117 108.878 89.9963 108.673C83.424 106.794 77.3049 108.33 71.5763 111.223C66.2328 113.922 61.2322 117.814 56.5084 121.007Z"
+					></path>
+				</g>
+			</svg>
 
-      <!-- Step 3 -->
-      <div class="w-full md:w-48 flex flex-col gap-2 items-center justify-center">
-        <span class="text-4xl">😔</span>
-        <h3 class="font-bold">Quit project</h3>
-      </div>
-    </div>
-  </div>
+			<!-- Step 3 -->
+			<div class="flex w-full flex-col items-center justify-center gap-2 md:w-48">
+				<span class="text-4xl">😔</span>
+				<h3 class="font-bold">Quit project</h3>
+			</div>
+		</div>
+	</div>
 </section>
 ```
 
 **Key details**:
+
 - Exact copy from trakrf-web (lines 46-65)
 - Arrow SVG embedded inline (from lines 1-23)
 - Responsive arrow rotation: flipped on mobile, rotated 90° on desktop
@@ -456,6 +540,7 @@ import heroImage from '../../public/images/hero.jpg';
 - Background uses DaisyUI `bg-neutral` and `text-neutral-content`
 
 **Validation**:
+
 - Section renders with neutral background
 - All 3 steps display with emojis
 - Arrows render between steps
@@ -479,63 +564,65 @@ import logo from '../../public/images/icon.png';
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-base-200 border-t border-base-content/10">
-  <div class="max-w-7xl mx-auto px-8 py-24">
-    <div class="flex lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
-      <!-- Logo and Description -->
-      <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
-        <a href="/" class="flex gap-2 justify-center md:justify-start items-center">
-          <Image src={logo} alt="TrakRF logo" class="w-6 h-6" />
-          <strong class="font-extrabold tracking-tight text-base md:text-lg">
-            TrakRF
-          </strong>
-        </a>
-        <p class="mt-3 text-sm text-base-content/80">
-          RFID right now: read tags today!
-        </p>
-        <p class="mt-3 text-sm text-base-content/60">
-          Copyright © {currentYear} - All rights reserved
-        </p>
-      </div>
+<footer class="border-t border-base-content/10 bg-base-200">
+	<div class="mx-auto max-w-7xl px-8 py-24">
+		<div class="flex flex-col flex-wrap md:flex-row md:flex-nowrap lg:items-start">
+			<!-- Logo and Description -->
+			<div class="mx-auto w-64 flex-shrink-0 text-center md:mx-0 md:text-left">
+				<a href="/" class="flex items-center justify-center gap-2 md:justify-start">
+					<Image src={logo} alt="TrakRF logo" class="h-6 w-6" />
+					<strong class="text-base font-extrabold tracking-tight md:text-lg"> TrakRF </strong>
+				</a>
+				<p class="mt-3 text-sm text-base-content/80">RFID right now: read tags today!</p>
+				<p class="mt-3 text-sm text-base-content/60">
+					Copyright © {currentYear} - All rights reserved
+				</p>
+			</div>
 
-      <!-- Links Columns -->
-      <div class="flex-grow flex flex-wrap justify-center md:pl-20 -mb-10 md:mt-0 mt-10 text-center md:text-left">
-        <!-- Column 1: Links -->
-        <div class="lg:w-1/3 md:w-1/2 w-full px-4">
-          <div class="footer-title font-semibold text-base-content tracking-widest text-sm md:text-left mb-3">
-            LINKS
-          </div>
-          <div class="flex flex-col justify-center items-center md:items-start gap-2 mb-10 text-sm">
-            <a href="mailto:support@trakrf.id" target="_blank" class="link link-hover" aria-label="Contact Support">
-              Support
-            </a>
-            <a href="/#pricing" class="link link-hover">
-              Pricing
-            </a>
-          </div>
-        </div>
+			<!-- Links Columns -->
+			<div
+				class="-mb-10 mt-10 flex flex-grow flex-wrap justify-center text-center md:mt-0 md:pl-20 md:text-left"
+			>
+				<!-- Column 1: Links -->
+				<div class="w-full px-4 md:w-1/2 lg:w-1/3">
+					<div
+						class="footer-title mb-3 text-sm font-semibold tracking-widest text-base-content md:text-left"
+					>
+						LINKS
+					</div>
+					<div class="mb-10 flex flex-col items-center justify-center gap-2 text-sm md:items-start">
+						<a
+							href="mailto:support@trakrf.id"
+							target="_blank"
+							class="link-hover link"
+							aria-label="Contact Support"
+						>
+							Support
+						</a>
+						<a href="/#pricing" class="link-hover link"> Pricing </a>
+					</div>
+				</div>
 
-        <!-- Column 2: Legal -->
-        <div class="lg:w-1/3 md:w-1/2 w-full px-4">
-          <div class="footer-title font-semibold text-base-content tracking-widest text-sm md:text-left mb-3">
-            LEGAL
-          </div>
-          <div class="flex flex-col justify-center items-center md:items-start gap-2 mb-10 text-sm">
-            <a href="/tos" class="link link-hover">
-              Terms of services
-            </a>
-            <a href="/privacy-policy" class="link link-hover">
-              Privacy policy
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+				<!-- Column 2: Legal -->
+				<div class="w-full px-4 md:w-1/2 lg:w-1/3">
+					<div
+						class="footer-title mb-3 text-sm font-semibold tracking-widest text-base-content md:text-left"
+					>
+						LEGAL
+					</div>
+					<div class="mb-10 flex flex-col items-center justify-center gap-2 text-sm md:items-start">
+						<a href="/tos" class="link-hover link"> Terms of services </a>
+						<a href="/privacy-policy" class="link-hover link"> Privacy policy </a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </footer>
 ```
 
 **Key details**:
+
 - Dynamic year using JavaScript `new Date().getFullYear()`
 - Support email: `support@trakrf.id`
 - Links: Pricing (hash anchor), Legal pages (actual routes)
@@ -543,6 +630,7 @@ const currentYear = new Date().getFullYear();
 - Responsive layout: centered mobile, left-aligned desktop
 
 **Validation**:
+
 - Footer renders at bottom of page
 - Current year displays correctly
 - All links navigate properly
@@ -571,38 +659,39 @@ const title = 'TrakRF - Track Tags Today!';
 const description = 'RFID right now: read tags today!';
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="light">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
 
-    <!-- OpenGraph -->
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content="/images/opengraph-image.png" />
-    <meta property="og:type" content="website" />
+		<!-- OpenGraph -->
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content="/images/opengraph-image.png" />
+		<meta property="og:type" content="website" />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="/images/twitter-image.png" />
-  </head>
-  <body>
-    <Header />
-    <main>
-      <Hero />
-      <Problem />
-    </main>
-    <Footer />
-  </body>
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content="/images/twitter-image.png" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<Hero />
+			<Problem />
+		</main>
+		<Footer />
+	</body>
 </html>
 ```
 
 **Key details**:
+
 - Imports global.css at top
 - All 4 Phase 1 components included
 - Metadata for SEO and social sharing
@@ -610,6 +699,7 @@ const description = 'RFID right now: read tags today!';
 - Semantic HTML structure (header, main, footer)
 
 **Validation**:
+
 - Page builds without errors
 - All components render in correct order
 - Metadata appears in page source
@@ -623,6 +713,7 @@ const description = 'RFID right now: read tags today!';
 **Not implemented in this plan - separate spec/build cycle**
 
 **Scope**:
+
 1. Install Alpine.js or implement vanilla JS solution
 2. Create FeaturesAccordion component with expand/collapse
 3. Create FAQ component with accordion functionality
@@ -642,6 +733,7 @@ const description = 'RFID right now: read tags today!';
 **Not implemented in this plan - separate spec/build cycle**
 
 **Scope**:
+
 1. Create blog index page listing 3 posts
 2. Create blog post detail page with slug routing
 3. Create 3 static blog post pages
@@ -676,20 +768,24 @@ const description = 'RFID right now: read tags today!';
 ## Integration Points
 
 **Styling**:
+
 - Tailwind config extends with 5 custom animations
 - Global CSS adds 2 custom classes (`.btn-gradient`, `.btn` override)
 - DaisyUI theme remains "light" (already configured)
 
 **Assets**:
+
 - Images in `public/images/` accessible via `/images/` URL path
 - Astro Image component uses image imports for optimization
 - Logo used in Header and Footer components
 
 **Pages**:
+
 - Homepage at `/` (index.astro)
 - Phase 2/3 will add blog and legal pages
 
 **Components**:
+
 - All Phase 1 components are standalone (no shared state)
 - Header and Footer used on all pages (will need Layout component in Phase 2/3)
 
@@ -698,12 +794,14 @@ const description = 'RFID right now: read tags today!';
 **CRITICAL**: These are not suggestions - they are GATES that block progress.
 
 After EVERY code change, use commands from `spec/stack.md`:
+
 - **Gate 1**: Syntax & Style → `pnpm lint`
 - **Gate 2**: Type Safety → `pnpm typecheck`
 - **Gate 3**: Unit Tests → `echo "✅ No tests to run (marketing site)"`
 - **Gate 4**: Build Success → `pnpm build`
 
 **Enforcement Rules**:
+
 - If ANY gate fails → Fix immediately
 - Re-run validation after fix
 - Loop until ALL gates pass
@@ -714,18 +812,21 @@ After EVERY code change, use commands from `spec/stack.md`:
 ## Validation Sequence
 
 **After each task (1-8)**:
+
 ```bash
 pnpm lint
 pnpm typecheck
 ```
 
 **After Task 3 (images downloaded)**:
+
 ```bash
 ls -lh public/images/
 # Verify all 4 images present and reasonable sizes
 ```
 
 **After Task 8 (homepage complete)**:
+
 ```bash
 pnpm lint
 pnpm typecheck
@@ -734,6 +835,7 @@ pnpm preview  # Manual check: visit http://localhost:4321
 ```
 
 **Visual validation checklist**:
+
 - [ ] Header displays with logo and desktop nav
 - [ ] Hero section shows headline, text, and image side-by-side
 - [ ] Problem section shows 3 steps with arrows between them
