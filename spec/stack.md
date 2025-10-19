@@ -1,34 +1,51 @@
 # Stack: Astro + Tailwind + TypeScript
 
 > **Package Manager**: pnpm
-> **Framework**: Astro (setup pending - see spec/astro-setup/)
-> **Styling**: Tailwind CSS
-> **Language**: TypeScript
+> **Framework**: Astro 4.x
+> **Styling**: Tailwind CSS + DaisyUI
+> **Language**: TypeScript (strict mode)
 
 ## Validation Commands
 
-*Note: These commands will be functional after completing spec/astro-setup/*
+These commands are used by `/check` and `/ship` to validate code quality.
 
 ## Lint
+
 ```bash
-# Coming soon - requires Astro setup
-echo "Lint commands will be added in astro-setup spec"
+pnpm lint
 ```
+
+Runs Prettier formatting and ESLint fixes. Must pass with no errors.
 
 ## Typecheck
+
 ```bash
-# Coming soon - requires Astro setup
-echo "Typecheck commands will be added in astro-setup spec"
+pnpm typecheck
 ```
+
+Runs Astro's TypeScript checker. Must pass with no type errors.
 
 ## Test
+
 ```bash
-# Coming soon - requires Astro setup
-echo "Test commands will be added in astro-setup spec"
+# No tests configured yet - will be added in future spec
+echo "✅ No tests to run (marketing site)"
+exit 0
 ```
 
+Tests will be added when interactive features are implemented.
+
 ## Build
+
 ```bash
-# Coming soon - requires Astro setup
-echo "Build commands will be added in astro-setup spec"
+pnpm build
 ```
+
+Builds the static site. Must complete successfully with no errors.
+
+---
+
+**Development Commands**:
+
+- `pnpm dev` - Start dev server with type checking
+- `pnpm preview` - Preview production build locally
