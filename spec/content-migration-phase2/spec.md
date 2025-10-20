@@ -18,6 +18,7 @@ So that I can learn about TrakRF's capabilities and make informed decisions
 ## Context
 
 **Current State (Phase 1 Complete)**:
+
 - ✅ Static homepage with 4 components: Header, Hero, Problem, Footer
 - ✅ Tailwind config with custom animations
 - ✅ Global CSS with .btn-gradient class
@@ -25,6 +26,7 @@ So that I can learn about TrakRF's capabilities and make informed decisions
 - ✅ SEO metadata (OpenGraph, Twitter Card)
 
 **Desired State (Phase 2)**:
+
 - Complete homepage with all 7 sections
 - Interactive accordions (Features, FAQ)
 - Mobile menu functionality
@@ -40,18 +42,19 @@ So that I can learn about TrakRF's capabilities and make informed decisions
 ### Phase Status
 
 **Phase 1 (COMPLETE ✅)**:
+
 1. ✅ **Header** - Navigation with logo, desktop nav (mobile menu HTML stubbed)
 2. ✅ **Hero** - Main heading with optimized image
 3. ✅ **Problem** - 3-step customer journey with SVG arrows
 4. ✅ **Footer** - Site footer with links and copyright
 
-**Phase 2 (THIS PR)**:
-4. **FeaturesAccordion** - Interactive feature showcase
-   - Source: `/home/mike/trakrf-web/components/FeaturesAccordion.tsx` (248 lines)
-   - 4 features with expand/collapse functionality
-   - Use vanilla JS or Alpine.js (avoid React dependency)
-   - Images/SVG icons for each feature
-   - Progressive enhancement (shows all content if JS disabled)
+**Phase 2 (THIS PR)**: 4. **FeaturesAccordion** - Interactive feature showcase
+
+- Source: `/home/mike/trakrf-web/components/FeaturesAccordion.tsx` (248 lines)
+- 4 features with expand/collapse functionality
+- Use vanilla JS or Alpine.js (avoid React dependency)
+- Images/SVG icons for each feature
+- Progressive enhancement (shows all content if JS disabled)
 
 5. **Pricing** - Pricing tiers display
    - Source: `/home/mike/trakrf-web/components/Pricing.tsx` (107 lines)
@@ -72,6 +75,7 @@ So that I can learn about TrakRF's capabilities and make informed decisions
    - Eye-catching design to drive conversions
 
 **Phase 3 (FUTURE)**:
+
 - Blog Pages (3 sample posts + blog index)
 - Legal Pages (Privacy Policy, Terms of Service)
 - Content cleanup (shipfa.st → trakrf.id references in blog/legal)
@@ -79,6 +83,7 @@ So that I can learn about TrakRF's capabilities and make informed decisions
 ### Interactivity Requirements
 
 **Client-side JavaScript needed for**:
+
 1. FeaturesAccordion expand/collapse
 2. FAQ accordion expand/collapse
 3. Header mobile menu toggle (enable the stubbed menu from Phase 1)
@@ -86,6 +91,7 @@ So that I can learn about TrakRF's capabilities and make informed decisions
 5. Optional: Scroll-to-pricing button behavior
 
 **Technology Decision**:
+
 - **Option A**: Alpine.js (lightweight, Tailwind-friendly, declarative)
   - Pros: Minimal JS (15KB gzipped), declarative syntax, easy to maintain
   - Cons: New dependency
@@ -94,6 +100,7 @@ So that I can learn about TrakRF's capabilities and make informed decisions
   - Cons: More code to write, less declarative
 
 **Approach**:
+
 - Keep bundle size minimal (< 100KB total)
 - Progressive enhancement (works without JS for basic content)
 - Avoid React/Vue/heavy frameworks
@@ -102,11 +109,13 @@ So that I can learn about TrakRF's capabilities and make informed decisions
 ### Styling Requirements
 
 **Already Complete (Phase 1)**:
+
 - ✅ Tailwind config with 5 custom animations
 - ✅ Global CSS with `.btn-gradient` class
 - ✅ DaisyUI configured (light/dark themes)
 
 **Phase 2 Additions**:
+
 - Verify accordion transition styles work with chosen JS approach
 - Ensure pricing card hover effects preserved
 - Maintain responsive design (mobile, tablet, desktop)
@@ -114,30 +123,35 @@ So that I can learn about TrakRF's capabilities and make informed decisions
 ### Image Asset Requirements
 
 **Already Downloaded (Phase 1)**:
+
 - ✅ Hero image (hero.jpg - 769KB optimized to 261KB)
 - ✅ Logo (icon.png)
 - ✅ Social cards (opengraph-image.png, twitter-image.png)
 
 **Phase 2 Assets**:
+
 - CTA background image (may reuse hero.jpg or download new)
 - Features accordion icons/images (check if needed from trakrf-web)
 
 **Optional Enhancement**:
+
 - **Social Media Card Redesign**: Current cards are gradient + text (created in Phase 1). If time permits, improve design with:
   - Better brand alignment (colors, typography)
   - Logo placement and sizing
   - Professional layout for social sharing
   - Proper 1200x630px dimensions maintained
-  - *Note: This is optional - current cards are functional*
+  - _Note: This is optional - current cards are functional_
 
 ### Component Integration
 
 **Update Homepage (`src/pages/index.astro`)**:
+
 - Import 4 new components (FeaturesAccordion, Pricing, FAQ, CTA)
 - Insert in proper order: Header → Hero → Problem → **FeaturesAccordion** → **Pricing** → **FAQ** → **CTA** → Footer
 - Ensure proper spacing and section breaks
 
 **Update Header (`src/components/Header.astro`)**:
+
 - Enable mobile menu functionality (currently stubbed)
 - Add click handlers for menu open/close
 - Test mobile menu on small screens
@@ -145,40 +159,48 @@ So that I can learn about TrakRF's capabilities and make informed decisions
 ### Content Requirements
 
 **Pricing Tiers** (from spec - ALREADY CORRECT PRICING):
+
 - **Starter**: $97
 - **Advanced**: $297 (featured)
 - **Enterprise**: "Call"
 
 **FAQ Content**:
+
 - Migrate 3 questions from trakrf-web/components/FAQ.tsx
 - Preserve exact copy (no improvements)
 
 **Features Content**:
+
 - Migrate 4 features from trakrf-web/components/FeaturesAccordion.tsx
 - Preserve exact copy, icons, and descriptions
 
 **CTA Copy**:
+
 - Migrate from trakrf-web/components/CTA.tsx
 - Preserve exact copy and button text
 
 ### Link Behavior
 
 **Stub these links** (point to placeholders):
+
 - "Sign In" button → `#signin` (no modal)
 - Checkout buttons → `#checkout` (no Stripe yet)
 
 **Active links**:
+
 - "Read Tags" → `https://handheld.trakrf.id`
 - Support email → `mailto:support@trakrf.id`
 - Hash anchors → `#pricing`, `#faq` (smooth scroll - IMPLEMENT IN PHASE 2)
 
 **Test smooth scroll**:
+
 - Clicking "Pricing" in header should smooth scroll to #pricing
 - Clicking "FAQ" in header should smooth scroll to #faq
 
 ## Validation Criteria
 
 ### Visual Parity (Phase 2 Scope)
+
 - [ ] Homepage has all 7 sections in correct order
 - [ ] FeaturesAccordion matches trakrf-web styling
 - [ ] Pricing cards match trakrf-web layout and design
@@ -188,6 +210,7 @@ So that I can learn about TrakRF's capabilities and make informed decisions
 - [ ] Fonts, colors, spacing match original
 
 ### Functional Parity (Phase 2 Scope)
+
 - [ ] FeaturesAccordion expands/collapses on click
 - [ ] FAQ accordion expands/collapses on click
 - [ ] Mobile menu opens/closes (enable stubbed menu from Phase 1)
@@ -197,6 +220,7 @@ So that I can learn about TrakRF's capabilities and make informed decisions
 - [ ] Progressive enhancement: content visible without JS
 
 ### Build & Performance
+
 - [ ] `pnpm build` completes successfully
 - [ ] Static output in dist/ contains homepage
 - [ ] No console errors in browser
@@ -205,6 +229,7 @@ So that I can learn about TrakRF's capabilities and make informed decisions
 - [ ] Images optimized by Astro
 
 ### Code Quality
+
 - [ ] All validation gates pass (lint, typecheck, build)
 - [ ] No console.log statements
 - [ ] No TODO comments (or marked for Phase 3)
@@ -215,6 +240,7 @@ So that I can learn about TrakRF's capabilities and make informed decisions
 ## Success Metrics
 
 **Phase 2 Targets**:
+
 - [ ] **Complete homepage** - All 7 sections present and functional
 - [ ] **Interactive elements functional** - Accordions, mobile menu, smooth scroll working
 - [ ] **Performance targets met** - Lighthouse 90+, JS bundle < 100KB
@@ -224,6 +250,7 @@ So that I can learn about TrakRF's capabilities and make informed decisions
 **Phase 2 Success Rate**: 100% of Phase 2 deliverables (4 components + interactivity)
 
 **Overall Project Status**:
+
 - ✅ Phase 1: Static foundation (4 components) - COMPLETE
 - 🎯 Phase 2: Interactive components (4 components + JS) - THIS PR
 - ⏳ Phase 3: Multi-page structure (blog, legal) - FUTURE
