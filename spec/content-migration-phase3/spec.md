@@ -1,4 +1,4 @@
-# Feature: TrakRF-Web Content Migration to Astro - Phase 3: Blog & Legal Pages
+# Feature: TrakRF-Web Content Migration to Astro - Phase 3: Blog Placeholder & Legal Pages
 
 ## Metadata
 
@@ -7,13 +7,13 @@
 
 ## Outcome
 
-Complete the TrakRF marketing site by adding blog pages (3 posts + index) and legal pages (Privacy Policy, Terms of Service) with proper content cleanup and multi-page routing validation.
+Complete the TrakRF marketing site structure by adding a blog placeholder page and legal pages (Privacy Policy, Terms of Service) with proper content cleanup. Extract all remaining structural value from trakrf-web and achieve complete site architecture closure.
 
 ## User Story
 
 As a visitor to trakrf.id
-I want to read blog posts and access legal information
-So that I can learn more about TrakRF and understand the terms of service
+I want to access legal information and see that a blog is planned
+So that I can understand the terms of service and know to check back for future content
 
 ## Context
 
@@ -22,18 +22,21 @@ So that I can learn more about TrakRF and understand the terms of service
 - ✅ Alpine.js interactivity (accordions, mobile menu, smooth scroll)
 - ✅ Optimized images and build pipeline
 - ✅ 0 validation errors, production-ready
+- ✅ Footer has legal links but pages don't exist yet
 
 **Desired State (Phase 3)**:
-- Complete multi-page structure with blog and legal pages
-- Blog index listing 3 sample posts
-- 3 individual blog post pages with proper routing
-- Privacy Policy and Terms of Service pages
-- All shipfa.st template references cleaned up
-- Footer links active (currently some are stubbed)
+- Complete site structure with all routes from trakrf-web
+- Blog placeholder page at `/blog` ("Coming Soon" with Header/Footer)
+- Privacy Policy and Terms of Service pages with critical cleanup
+- All navigation links functional (no dead links)
+- All shipfa.st/marc template references cleaned up
+- Zero reason to revisit trakrf-web codebase
 
-**Scope**: Add 5 new pages (blog index, 3 blog posts, 2 legal pages) and validate Astro's multi-page routing works correctly.
+**Scope**: Add 3 new pages (blog placeholder, privacy policy, TOS) to complete structural migration and validate multi-page routing.
 
-**Quality Bar**: Content migrated as-is from trakrf-web, template references cleaned up, multi-page navigation functional.
+**Quality Bar**: Clean legal content, functional blog placeholder, all navigation working, complete architectural extraction from source.
+
+**Philosophy**: Extract all structural value from trakrf-web (routes, navigation, page architecture) without migrating template sample content. Blog posts will be added later as original TrakRF content.
 
 ## Technical Requirements
 
@@ -41,57 +44,53 @@ So that I can learn more about TrakRF and understand the terms of service
 
 **Phase 1 (COMPLETE ✅)**: Static foundation - Header, Hero, Problem, Footer
 **Phase 2 (COMPLETE ✅)**: Interactive components - FeaturesAccordion, Pricing, FAQ, CTA
-**Phase 3 (THIS PR)**: Multi-page structure - Blog (4 pages) + Legal (2 pages)
+**Phase 3 (THIS PR)**: Site structure completion - Blog placeholder + Legal pages (3 pages)
 
-### Blog Pages (4 pages total)
+### Blog Placeholder Page (1 page)
 
-#### 1. Blog Index Page
+#### 1. Blog Coming Soon Page
 
 **File**: `src/pages/blog/index.astro`
-**Source**: `/home/mike/trakrf-web/app/blog/page.tsx`
+**Source**: Structure only (no content migration - template samples)
 
 **Requirements**:
-- List 3 blog posts with title, excerpt, date, author
-- Each post links to `/blog/[slug]`
-- Use consistent layout with Header and Footer
-- Responsive card grid (1 column mobile, 2-3 columns desktop)
-- SEO metadata for blog index
+- Simple "Coming Soon" page with Header and Footer
+- Clear message that blog is planned
+- Consistent styling with rest of site
+- Call-to-action to check back or subscribe (optional)
+- SEO metadata for blog page
 
-**Content**:
-- Page title: "Blog - TrakRF"
-- Heading: "Latest from TrakRF" (or similar from source)
-- 3 posts: "Introducing Supabase", "Introducing Stripe", "Introducing Mailgun" (or actual posts from trakrf-web)
+**Content** (simple & clean):
+```astro
+<main class="min-h-screen flex items-center justify-center">
+  <div class="text-center max-w-2xl mx-auto p-8">
+    <h1 class="text-4xl font-bold mb-4">Blog Coming Soon</h1>
+    <p class="text-lg opacity-80 mb-8">
+      We're working on great content about RFID tracking, tag management, and more.
+      Check back soon!
+    </p>
+    <a href="/" class="btn btn-primary">Back to Home</a>
+  </div>
+</main>
+```
 
-#### 2. Individual Blog Post Pages (3 posts)
+**Why Placeholder Instead of Sample Posts**:
+- ✅ trakrf-web blog posts are ShipFast template samples ("Introducing Supabase to ShipFast")
+- ✅ Not relevant to TrakRF (RFID tracking product)
+- ✅ Future blog will have original TrakRF content
+- ✅ Placeholder reserves route and sets expectations
+- ✅ Avoids migrating irrelevant template content
 
-**Files**:
-- `src/pages/blog/introducing-supabase.astro`
-- `src/pages/blog/introducing-stripe.astro`
-- `src/pages/blog/introducing-mailgun.astro`
-
-**Source**: `/home/mike/trakrf-web/app/blog/[article]/page.tsx` (and individual article directories)
-
-**Requirements**:
-- Full blog post content with title, date, author, body
-- Header image (if available)
-- Consistent layout with Header and Footer
-- Back to blog index link
-- SEO metadata for each post (title, description, OG image)
-
-**Content Migration**:
-- Copy HTML/text content exactly as-is
-- Download header images to `public/images/blog/[slug]/`
-- Author avatar to `public/images/authors/`
-- Apply content cleanup (see below)
-
-**Simplification**:
-- **NO MDX**: Convert to simple Astro pages with inline HTML
-- **NO complex routing**: Static file-based routing only
-- Keep it simple - just migrated content in Astro templates
+**What This Achieves**:
+- ✅ `/blog` route exists and works
+- ✅ Footer blog link functional (no dead link)
+- ✅ Professional "under construction" message
+- ✅ Multi-page routing validated
+- ✅ Blog infrastructure ready for real content
 
 ### Legal Pages (2 pages)
 
-#### 3. Privacy Policy Page
+#### 2. Privacy Policy Page
 
 **File**: `src/pages/privacy-policy.astro`
 **Source**: `/home/mike/trakrf-web/app/privacy-policy/page.tsx`
@@ -103,13 +102,14 @@ So that I can learn more about TrakRF and understand the terms of service
 - Last updated date
 - SEO metadata
 
-**Content Cleanup** (CRITICAL):
+**Content Cleanup** (CRITICAL - Found in Source Audit):
 - Replace ALL `shipfa.st` → `trakrf.id`
-- Replace `marc@shipfa.st` → `support@trakrf.id`
-- Replace company name references appropriately
-- Update contact information
+- ❌❌❌ Line 100: `marc@trakrf.id` → `support@trakrf.id` (CRITICAL ERROR IN SOURCE)
+- Remove ChatGPT prompt comments (lines 5-26)
+- Update "Last Updated" date to actual migration date
+- Verify all contact information
 
-#### 4. Terms of Service Page
+#### 3. Terms of Service Page
 
 **File**: `src/pages/tos.astro`
 **Source**: `/home/mike/trakrf-web/app/tos/page.tsx`
@@ -121,53 +121,58 @@ So that I can learn more about TrakRF and understand the terms of service
 - Last updated date
 - SEO metadata
 
-**Content Cleanup** (CRITICAL):
-- Same replacements as Privacy Policy
+**Content Cleanup** (CRITICAL - Found in Source Audit):
+- ❌❌❌ Line 90: `marc@shipfa.st` → `support@trakrf.id` (CRITICAL ERROR IN SOURCE - NOT FIXED!)
+- Replace ALL `shipfa.st` → `trakrf.id`
+- Remove ChatGPT prompt comments (lines 5-26)
+- Update "Last Updated" date to actual migration date
 - Ensure pricing references match current ($97 Starter, $297 Advanced)
 - Update all contact/support information
+- Fix "Governing Law: France" if incorrect for TrakRF
 
-### Content Cleanup Requirements
+### Content Cleanup Requirements (Legal Pages Only)
 
-**MANDATORY find/replace across ALL blog and legal content**:
+**CRITICAL ISSUES FOUND IN SOURCE AUDIT** (must fix):
+
+| Line | File | Find | Replace | Priority |
+|------|------|------|---------|----------|
+| 90 | tos/page.tsx | `marc@shipfa.st` | `support@trakrf.id` | ❌❌❌ CRITICAL |
+| 100 | privacy-policy/page.tsx | `marc@trakrf.id` | `support@trakrf.id` | ❌❌ HIGH |
+| 5-26 | Both | ChatGPT comments | (delete) | ⚠️ MEDIUM |
+| 60,25 | Both | Old dates | Current date | ⚠️ MEDIUM |
+
+**MANDATORY find/replace across legal content**:
 
 | Find | Replace | Context |
 |------|---------|---------|
 | `shipfa.st` | `trakrf.id` | Domain references |
 | `ShipFast` | `TrakRF` | Product name |
-| `marc` | `TrakRF Team` | Author references (blog) |
-| `marc@shipfa.st` | `support@trakrf.id` | Email addresses |
-| `Marc Lou` | `TrakRF Team` | Author name |
-| Template pricing | Actual pricing | If mentioned in legal |
+| `marc@shipfa.st` | `support@trakrf.id` | Email (TOS line 90) |
+| `marc@trakrf.id` | `support@trakrf.id` | Email (Privacy line 100) |
 
 **Manual review needed**:
-- Any hardcoded URLs
-- Social media links
-- Support/contact information
-- Company legal entity name (if different from product)
+- "Governing Law: France" (may not apply to TrakRF)
+- Company legal entity name
+- Refund policy (7 days mentioned)
+- Boilerplate language accuracy
 
 ### Image Asset Migration
 
-**Blog Images** (download to `public/images/blog/`):
-- `/home/mike/trakrf-web/public/blog/introducing-supabase/header.png` (if exists)
-- Any other blog post header images
-
-**Author Images** (download to `public/images/authors/`):
-- `/home/mike/trakrf-web/app/blog/_assets/images/authors/marc.png` → `trakrf-team.png`
-- Use Astro Image component for optimization
-
-**Legal Pages**:
-- No images expected (text-only pages)
+**No images needed for Phase 3**:
+- Blog placeholder: No images
+- Legal pages: Text-only pages
+- All homepage images already migrated (Phases 1 & 2)
 
 ### Navigation Updates
 
-**Update Footer** (`src/components/Footer.astro`):
-- Activate blog link: `/blog`
-- Activate privacy policy link: `/privacy-policy`
-- Activate terms of service link: `/tos`
-- Verify all links are no longer stubs
+**Footer Already Has Links** (`src/components/Footer.astro`):
+- ✅ Blog link: Currently missing - **ADD IT**: `/blog`
+- ✅ Privacy policy link: Already present (line 56) - `/privacy-policy`
+- ✅ Terms of service link: Already present (line 55) - `/tos`
 
-**Update Header** (if blog link exists):
-- Add blog link to main nav (optional, check source)
+**Action Required**:
+- Add blog link to Footer LINKS section (alongside Support and Pricing)
+- No header nav changes needed (blog not in main nav on trakrf-web)
 
 ### Page Layout & Structure
 
@@ -226,25 +231,26 @@ const ogImage = "/images/blog/introducing-supabase/header.png";
 ## Validation Criteria
 
 ### Multi-Page Structure
-- [ ] Blog index page accessible at `/blog`
-- [ ] 3 blog posts accessible at `/blog/[slug]`
+- [ ] Blog placeholder page accessible at `/blog`
 - [ ] Privacy policy accessible at `/privacy-policy`
 - [ ] Terms of service accessible at `/tos`
 - [ ] All pages use consistent Header/Footer
 - [ ] Navigation between pages works smoothly
+- [ ] Blog placeholder has clear "Coming Soon" message
 
-### Content Accuracy
-- [ ] No `shipfa.st` references remain in content
-- [ ] No `marc` or `marc@shipfa.st` references remain
-- [ ] All emails use `trakrf.id` domain
+### Content Accuracy (Legal Pages)
+- [ ] CRITICAL: TOS line 90 fixed (`marc@shipfa.st` → `support@trakrf.id`)
+- [ ] CRITICAL: Privacy line 100 fixed (`marc@trakrf.id` → `support@trakrf.id`)
+- [ ] No `shipfa.st` references remain
+- [ ] All emails use `support@trakrf.id`
 - [ ] Company/product name is `TrakRF` throughout
-- [ ] Author attribution is `TrakRF Team` (blog posts)
+- [ ] ChatGPT prompt comments removed
+- [ ] "Last Updated" dates current
 
 ### Visual Parity
-- [ ] Blog index matches trakrf-web styling
-- [ ] Blog posts match trakrf-web layout
+- [ ] Blog placeholder looks professional and clean
 - [ ] Legal pages match trakrf-web formatting
-- [ ] Header images display correctly (blog)
+- [ ] Consistent Header/Footer across all pages
 - [ ] Responsive design works (mobile, tablet, desktop)
 
 ### SEO & Metadata
@@ -256,10 +262,10 @@ const ogImage = "/images/blog/introducing-supabase/header.png";
 
 ### Build & Performance
 - [ ] `pnpm build` completes successfully
-- [ ] All 6 pages generated in dist/
+- [ ] All 3 new pages generated in dist/ (blog, privacy-policy, tos)
 - [ ] No console errors in browser
-- [ ] Images optimized by Astro
 - [ ] Page load times reasonable
+- [ ] Static site remains lightweight
 
 ### Code Quality
 - [ ] All validation gates pass (lint, typecheck, build)
@@ -269,35 +275,43 @@ const ogImage = "/images/blog/introducing-supabase/header.png";
 - [ ] No console.log statements
 
 ### Navigation & Links
-- [ ] Footer blog link works
+- [ ] Footer blog link added and works
 - [ ] Footer privacy/TOS links work
-- [ ] Blog index → post links work
-- [ ] Blog post → back to index works
-- [ ] Header links work from all pages
+- [ ] Blog placeholder "Back to Home" button works
+- [ ] Legal pages "Back" button works
+- [ ] All navigation tested from every page
 
 ## Success Metrics
 
 **Phase 3 Targets**:
-- [ ] **Multi-page structure complete** - 6 pages total (blog index, 3 posts, 2 legal)
-- [ ] **Content cleanup complete** - 0 shipfa.st references, all TrakRF branding
-- [ ] **Routing validated** - All navigation works, no broken links
-- [ ] **SEO optimized** - All pages have proper metadata
-- [ ] **Visual parity** - Matches trakrf-web appearance
+- [ ] **Site structure complete** - All routes from trakrf-web exist (homepage, blog, legal)
+- [ ] **Content cleanup complete** - Critical fixes (marc@ emails), 0 shipfa.st references
+- [ ] **Navigation complete** - All footer/header links functional, no dead links
+- [ ] **Routing validated** - Multi-page navigation works flawlessly
+- [ ] **Structural extraction complete** - Zero reason to revisit trakrf-web codebase
 
-**Phase 3 Success Rate**: 100% of multi-page deliverables
+**Phase 3 Success Rate**: 100% of structural migration objectives
 
 **Overall Project Status**:
 - ✅ Phase 1: Static foundation (4 components) - COMPLETE
 - ✅ Phase 2: Interactive components (4 components + JS) - COMPLETE
-- 🎯 Phase 3: Multi-page structure (6 pages) - THIS PR
+- 🎯 Phase 3: Site structure completion (3 pages: blog placeholder + legal) - THIS PR
+
+**Migration Completion**:
+- ✅ 8/8 homepage components migrated
+- ✅ All navigation routes established
+- ✅ All legal requirements met
+- ✅ Site architecture 100% extracted from trakrf-web
+- 🎯 Ready for original content creation (future blog posts)
 
 ## Constraints
 
-- **No improvements**: Copy content exactly as-is, don't edit or enhance
-- **No MDX complexity**: Keep blog posts as simple Astro pages
+- **No sample content migration**: Blog posts are ShipFast templates, not TrakRF content
+- **Placeholder only**: Blog route exists but no sample posts
+- **Legal cleanup critical**: Must fix marc@ email errors in source
 - **No backend**: All static pages, no dynamic routing
-- **No comments**: No blog post comments or interactions
-- **MVP quality**: Functional and content-accurate, not pixel-perfect
+- **Structural focus**: Extract architecture, not template content
+- **Clean break**: After Phase 3, never need to reference trakrf-web again
 
 ## References
 
@@ -310,17 +324,36 @@ const ogImage = "/images/blog/introducing-supabase/header.png";
 
 ## Notes
 
-**Phase 3 Focus**: This phase completes the full content migration with multi-page structure. The goal is to validate Astro's routing works correctly and clean up all template references for a production-ready marketing site.
+**Phase 3 Focus**: This phase completes the structural migration by extracting all remaining architectural value from trakrf-web. The goal is to establish all routes, fix critical legal content errors, and achieve complete closure on the migration project.
 
-**Content Source**: The trakrf-web codebase contains shipfa.st template blog posts and legal pages. We're migrating those as-is but cleaning up all template references (shipfa.st → trakrf.id).
+**Why Blog Placeholder Instead of Sample Posts**:
+- trakrf-web blog contains ShipFast template samples ("Introducing Supabase to ShipFast")
+- Not relevant to TrakRF's RFID tracking product
+- Future blog will feature original TrakRF content (tutorials, case studies, updates)
+- Placeholder reserves route and sets professional expectations
+- Avoids wasted effort migrating irrelevant template content
 
-**Simplification Strategy**: Unlike the original Next.js site which may use complex MDX or dynamic routing, we're keeping this simple with static file-based Astro pages. Each blog post is a separate .astro file.
+**Critical Legal Cleanup**:
+- Source code has `marc@shipfa.st` still present in TOS (line 90) - MUST FIX
+- Source code has `marc@trakrf.id` in Privacy (line 100) - should be `support@`
+- These are production-blocking errors that must be corrected
 
-**Post-Phase 3**: After this phase, the marketing site will be 100% complete with homepage, blog, and legal pages. Future work might include:
-- Actual blog content (replace template posts)
-- Blog pagination (if many posts)
-- Blog categories/tags
-- Search functionality
-- Newsletter signup
+**The "Squeeze All the Juice" Principle**:
+- ✅ Extract: Site architecture (routes, navigation, page structure)
+- ✅ Extract: Legal page structure and layout
+- ✅ Extract: Multi-page routing patterns
+- ❌ Leave behind: Template sample content (blog posts about ShipFast integrations)
+- ❌ Leave behind: Sample blog authors/categories/images
 
-**Deployment Ready**: After Phase 3 ships, the site is fully production-ready and can be deployed to Cloudflare Pages.
+**Post-Phase 3 Completeness**:
+After this phase ships:
+- ✅ Every meaningful route from trakrf-web exists in new site
+- ✅ All navigation links functional
+- ✅ Legal pages production-ready with cleaned content
+- ✅ Blog infrastructure ready for real content
+- ✅ Zero structural debt
+- ✅ **trakrf-web can be archived - migration complete**
+
+Future work is purely additive (new TrakRF blog posts), not rework.
+
+**Deployment Ready**: After Phase 3 ships, the marketing site is 100% structurally complete and production-ready. Blog posts can be added incrementally without touching site structure.
