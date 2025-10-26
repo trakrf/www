@@ -1,3 +1,15 @@
+<!--
+# spec.md - WHAT to Build
+
+This file describes WHAT you want to achieve:
+- User-facing goals and outcomes
+- Business requirements and constraints
+- Success criteria
+
+Keep this concise and focused on outcomes, not implementation details.
+The /plan command will generate plan.md with HOW to implement this spec.
+-->
+
 # Feature: [Name]
 
 ## Metadata
@@ -35,7 +47,7 @@ So that [benefit]
 
 ## Success Metrics
 
-Define measurable success criteria that will be tracked in SHIPPED.md:
+Define measurable success criteria:
 
 - [ ] [Metric 1 - e.g., "Form validation prevents 100% of invalid submissions"]
 - [ ] [Metric 2 - e.g., "API response time < 500ms"]

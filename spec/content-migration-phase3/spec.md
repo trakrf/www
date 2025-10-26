@@ -18,6 +18,7 @@ So that I can understand the terms of service and know to check back for future 
 ## Context
 
 **Current State (Phase 2 Complete)**:
+
 - ✅ Complete homepage with 7 sections (all interactive)
 - ✅ Alpine.js interactivity (accordions, mobile menu, smooth scroll)
 - ✅ Optimized images and build pipeline
@@ -25,6 +26,7 @@ So that I can understand the terms of service and know to check back for future 
 - ✅ Footer has legal links but pages don't exist yet
 
 **Desired State (Phase 3)**:
+
 - Complete site structure with all routes from trakrf-web
 - Blog placeholder page at `/blog` ("Coming Soon" with Header/Footer)
 - Privacy Policy and Terms of Service pages with critical cleanup
@@ -54,6 +56,7 @@ So that I can understand the terms of service and know to check back for future 
 **Source**: Structure only (no content migration - template samples)
 
 **Requirements**:
+
 - Simple "Coming Soon" page with Header and Footer
 - Clear message that blog is planned
 - Consistent styling with rest of site
@@ -61,20 +64,21 @@ So that I can understand the terms of service and know to check back for future 
 - SEO metadata for blog page
 
 **Content** (simple & clean):
+
 ```astro
-<main class="min-h-screen flex items-center justify-center">
-  <div class="text-center max-w-2xl mx-auto p-8">
-    <h1 class="text-4xl font-bold mb-4">Blog Coming Soon</h1>
-    <p class="text-lg opacity-80 mb-8">
-      We're working on great content about RFID tracking, tag management, and more.
-      Check back soon!
-    </p>
-    <a href="/" class="btn btn-primary">Back to Home</a>
-  </div>
+<main class="flex min-h-screen items-center justify-center">
+	<div class="mx-auto max-w-2xl p-8 text-center">
+		<h1 class="mb-4 text-4xl font-bold">Blog Coming Soon</h1>
+		<p class="mb-8 text-lg opacity-80">
+			We're working on great content about RFID tracking, tag management, and more. Check back soon!
+		</p>
+		<a href="/" class="btn btn-primary">Back to Home</a>
+	</div>
 </main>
 ```
 
 **Why Placeholder Instead of Sample Posts**:
+
 - ✅ trakrf-web blog posts are ShipFast template samples ("Introducing Supabase to ShipFast")
 - ✅ Not relevant to TrakRF (RFID tracking product)
 - ✅ Future blog will have original TrakRF content
@@ -82,6 +86,7 @@ So that I can understand the terms of service and know to check back for future 
 - ✅ Avoids migrating irrelevant template content
 
 **What This Achieves**:
+
 - ✅ `/blog` route exists and works
 - ✅ Footer blog link functional (no dead link)
 - ✅ Professional "under construction" message
@@ -96,6 +101,7 @@ So that I can understand the terms of service and know to check back for future 
 **Source**: `/home/mike/trakrf-web/app/privacy-policy/page.tsx`
 
 **Requirements**:
+
 - Full privacy policy text
 - Consistent layout with Header and Footer
 - Table of contents (if present in source)
@@ -103,6 +109,7 @@ So that I can understand the terms of service and know to check back for future 
 - SEO metadata
 
 **Content Cleanup** (CRITICAL - Found in Source Audit):
+
 - Replace ALL `shipfa.st` → `trakrf.id`
 - ❌❌❌ Line 100: `marc@trakrf.id` → `support@trakrf.id` (CRITICAL ERROR IN SOURCE)
 - Remove ChatGPT prompt comments (lines 5-26)
@@ -115,6 +122,7 @@ So that I can understand the terms of service and know to check back for future 
 **Source**: `/home/mike/trakrf-web/app/tos/page.tsx`
 
 **Requirements**:
+
 - Full terms of service text
 - Consistent layout with Header and Footer
 - Numbered sections (if present in source)
@@ -122,6 +130,7 @@ So that I can understand the terms of service and know to check back for future 
 - SEO metadata
 
 **Content Cleanup** (CRITICAL - Found in Source Audit):
+
 - ❌❌❌ Line 90: `marc@shipfa.st` → `support@trakrf.id` (CRITICAL ERROR IN SOURCE - NOT FIXED!)
 - Replace ALL `shipfa.st` → `trakrf.id`
 - Remove ChatGPT prompt comments (lines 5-26)
@@ -134,23 +143,24 @@ So that I can understand the terms of service and know to check back for future 
 
 **CRITICAL ISSUES FOUND IN SOURCE AUDIT** (must fix):
 
-| Line | File | Find | Replace | Priority |
-|------|------|------|---------|----------|
-| 90 | tos/page.tsx | `marc@shipfa.st` | `support@trakrf.id` | ❌❌❌ CRITICAL |
-| 100 | privacy-policy/page.tsx | `marc@trakrf.id` | `support@trakrf.id` | ❌❌ HIGH |
-| 5-26 | Both | ChatGPT comments | (delete) | ⚠️ MEDIUM |
-| 60,25 | Both | Old dates | Current date | ⚠️ MEDIUM |
+| Line  | File                    | Find             | Replace             | Priority        |
+| ----- | ----------------------- | ---------------- | ------------------- | --------------- |
+| 90    | tos/page.tsx            | `marc@shipfa.st` | `support@trakrf.id` | ❌❌❌ CRITICAL |
+| 100   | privacy-policy/page.tsx | `marc@trakrf.id` | `support@trakrf.id` | ❌❌ HIGH       |
+| 5-26  | Both                    | ChatGPT comments | (delete)            | ⚠️ MEDIUM       |
+| 60,25 | Both                    | Old dates        | Current date        | ⚠️ MEDIUM       |
 
 **MANDATORY find/replace across legal content**:
 
-| Find | Replace | Context |
-|------|---------|---------|
-| `shipfa.st` | `trakrf.id` | Domain references |
-| `ShipFast` | `TrakRF` | Product name |
-| `marc@shipfa.st` | `support@trakrf.id` | Email (TOS line 90) |
+| Find             | Replace             | Context                  |
+| ---------------- | ------------------- | ------------------------ |
+| `shipfa.st`      | `trakrf.id`         | Domain references        |
+| `ShipFast`       | `TrakRF`            | Product name             |
+| `marc@shipfa.st` | `support@trakrf.id` | Email (TOS line 90)      |
 | `marc@trakrf.id` | `support@trakrf.id` | Email (Privacy line 100) |
 
 **Manual review needed**:
+
 - "Governing Law: France" (may not apply to TrakRF)
 - Company legal entity name
 - Refund policy (7 days mentioned)
@@ -159,6 +169,7 @@ So that I can understand the terms of service and know to check back for future 
 ### Image Asset Migration
 
 **No images needed for Phase 3**:
+
 - Blog placeholder: No images
 - Legal pages: Text-only pages
 - All homepage images already migrated (Phases 1 & 2)
@@ -166,11 +177,13 @@ So that I can understand the terms of service and know to check back for future 
 ### Navigation Updates
 
 **Footer Already Has Links** (`src/components/Footer.astro`):
+
 - ✅ Blog link: Currently missing - **ADD IT**: `/blog`
 - ✅ Privacy policy link: Already present (line 56) - `/privacy-policy`
 - ✅ Terms of service link: Already present (line 55) - `/tos`
 
 **Action Required**:
+
 - Add blog link to Footer LINKS section (alongside Support and Pricing)
 - No header nav changes needed (blog not in main nav on trakrf-web)
 
@@ -188,6 +201,7 @@ So that I can understand the terms of service and know to check back for future 
 ### SEO Metadata
 
 **Each page needs**:
+
 - `<title>` tag (unique per page)
 - `<meta name="description">` (unique per page)
 - OpenGraph tags (og:title, og:description, og:image)
@@ -195,25 +209,28 @@ So that I can understand the terms of service and know to check back for future 
 - Canonical URL
 
 **Example** (Blog Post):
+
 ```astro
 ---
-const title = "Introducing Supabase - TrakRF Blog";
-const description = "Learn how we integrated Supabase...";
-const ogImage = "/images/blog/introducing-supabase/header.png";
+const title = 'Introducing Supabase - TrakRF Blog';
+const description = 'Learn how we integrated Supabase...';
+const ogImage = '/images/blog/introducing-supabase/header.png';
 ---
+
 <head>
-  <title>{title}</title>
-  <meta name="description" content={description} />
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:image" content={ogImage} />
-  <!-- etc -->
+	<title>{title}</title>
+	<meta name="description" content={description} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta property="og:image" content={ogImage} />
+	<!-- etc -->
 </head>
 ```
 
 ### Routing Validation
 
 **Test multi-page navigation**:
+
 - Homepage → Blog index
 - Blog index → Individual post
 - Blog post → Back to blog
@@ -222,6 +239,7 @@ const ogImage = "/images/blog/introducing-supabase/header.png";
 - All pages → Header links work
 
 **URL structure**:
+
 - `/` - Homepage
 - `/blog` - Blog index
 - `/blog/introducing-supabase` - Blog post
@@ -231,6 +249,7 @@ const ogImage = "/images/blog/introducing-supabase/header.png";
 ## Validation Criteria
 
 ### Multi-Page Structure
+
 - [ ] Blog placeholder page accessible at `/blog`
 - [ ] Privacy policy accessible at `/privacy-policy`
 - [ ] Terms of service accessible at `/tos`
@@ -239,6 +258,7 @@ const ogImage = "/images/blog/introducing-supabase/header.png";
 - [ ] Blog placeholder has clear "Coming Soon" message
 
 ### Content Accuracy (Legal Pages)
+
 - [ ] CRITICAL: TOS line 90 fixed (`marc@shipfa.st` → `support@trakrf.id`)
 - [ ] CRITICAL: Privacy line 100 fixed (`marc@trakrf.id` → `support@trakrf.id`)
 - [ ] No `shipfa.st` references remain
@@ -248,12 +268,14 @@ const ogImage = "/images/blog/introducing-supabase/header.png";
 - [ ] "Last Updated" dates current
 
 ### Visual Parity
+
 - [ ] Blog placeholder looks professional and clean
 - [ ] Legal pages match trakrf-web formatting
 - [ ] Consistent Header/Footer across all pages
 - [ ] Responsive design works (mobile, tablet, desktop)
 
 ### SEO & Metadata
+
 - [ ] Each page has unique title and description
 - [ ] OpenGraph tags present on all pages
 - [ ] Twitter Card tags present on all pages
@@ -261,6 +283,7 @@ const ogImage = "/images/blog/introducing-supabase/header.png";
 - [ ] No broken meta tags or duplicate content
 
 ### Build & Performance
+
 - [ ] `pnpm build` completes successfully
 - [ ] All 3 new pages generated in dist/ (blog, privacy-policy, tos)
 - [ ] No console errors in browser
@@ -268,6 +291,7 @@ const ogImage = "/images/blog/introducing-supabase/header.png";
 - [ ] Static site remains lightweight
 
 ### Code Quality
+
 - [ ] All validation gates pass (lint, typecheck, build)
 - [ ] No hardcoded localhost URLs
 - [ ] Alt text on all images
@@ -275,6 +299,7 @@ const ogImage = "/images/blog/introducing-supabase/header.png";
 - [ ] No console.log statements
 
 ### Navigation & Links
+
 - [ ] Footer blog link added and works
 - [ ] Footer privacy/TOS links work
 - [ ] Blog placeholder "Back to Home" button works
@@ -284,6 +309,7 @@ const ogImage = "/images/blog/introducing-supabase/header.png";
 ## Success Metrics
 
 **Phase 3 Targets**:
+
 - [ ] **Site structure complete** - All routes from trakrf-web exist (homepage, blog, legal)
 - [ ] **Content cleanup complete** - Critical fixes (marc@ emails), 0 shipfa.st references
 - [ ] **Navigation complete** - All footer/header links functional, no dead links
@@ -293,11 +319,13 @@ const ogImage = "/images/blog/introducing-supabase/header.png";
 **Phase 3 Success Rate**: 100% of structural migration objectives
 
 **Overall Project Status**:
+
 - ✅ Phase 1: Static foundation (4 components) - COMPLETE
 - ✅ Phase 2: Interactive components (4 components + JS) - COMPLETE
 - 🎯 Phase 3: Site structure completion (3 pages: blog placeholder + legal) - THIS PR
 
 **Migration Completion**:
+
 - ✅ 8/8 homepage components migrated
 - ✅ All navigation routes established
 - ✅ All legal requirements met
@@ -327,6 +355,7 @@ const ogImage = "/images/blog/introducing-supabase/header.png";
 **Phase 3 Focus**: This phase completes the structural migration by extracting all remaining architectural value from trakrf-web. The goal is to establish all routes, fix critical legal content errors, and achieve complete closure on the migration project.
 
 **Why Blog Placeholder Instead of Sample Posts**:
+
 - trakrf-web blog contains ShipFast template samples ("Introducing Supabase to ShipFast")
 - Not relevant to TrakRF's RFID tracking product
 - Future blog will feature original TrakRF content (tutorials, case studies, updates)
@@ -334,11 +363,13 @@ const ogImage = "/images/blog/introducing-supabase/header.png";
 - Avoids wasted effort migrating irrelevant template content
 
 **Critical Legal Cleanup**:
+
 - Source code has `marc@shipfa.st` still present in TOS (line 90) - MUST FIX
 - Source code has `marc@trakrf.id` in Privacy (line 100) - should be `support@`
 - These are production-blocking errors that must be corrected
 
 **The "Squeeze All the Juice" Principle**:
+
 - ✅ Extract: Site architecture (routes, navigation, page structure)
 - ✅ Extract: Legal page structure and layout
 - ✅ Extract: Multi-page routing patterns
@@ -347,6 +378,7 @@ const ogImage = "/images/blog/introducing-supabase/header.png";
 
 **Post-Phase 3 Completeness**:
 After this phase ships:
+
 - ✅ Every meaningful route from trakrf-web exists in new site
 - ✅ All navigation links functional
 - ✅ Legal pages production-ready with cleaned content
