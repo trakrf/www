@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import PreviewBanner from '../components/PreviewBanner.astro';
 
 interface Props {
 	title: string;
@@ -20,6 +21,9 @@ const { title, description, ogImage = '/images/opengraph-image.png' } = Astro.pr
 		<title>{title}</title>
 		<meta name="description" content={description} />
 
+		<!-- Favicon -->
+		<link rel="icon" type="image/png" href="/images/icon.png" />
+
 		<!-- OpenGraph -->
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
@@ -32,11 +36,13 @@ const { title, description, ogImage = '/images/opengraph-image.png' } = Astro.pr
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImage} />
 
-		<!-- Alpine.js -->
+		<!-- Alpine.js with Collapse plugin -->
+		<script is:inline defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
 		<script is:inline defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
 		></script>
 	</head>
 	<body>
+		<PreviewBanner />
 		<Header />
 		<slot />
 		<Footer />

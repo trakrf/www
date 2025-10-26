@@ -40,6 +40,28 @@ pnpm dev
 pnpm build
 ```
 
+## Preview Branch
+
+The `preview` branch is automatically synced via GitHub Actions and deployed to Cloudflare Pages at `https://preview.trakrf.id`. When deployed, it displays a Pythonesque visual indicator to remind you that you're viewing the preview environment.
+
+### Cloudflare Pages Configuration
+
+To enable the preview banner on the preview branch deployment, set the following environment variable in the Cloudflare Pages dashboard:
+
+- **Branch**: `preview`
+- **Variable**: `PUBLIC_BRANCH`
+- **Value**: `preview`
+
+The banner will automatically appear when the site is built with this environment variable set.
+
+### Local Testing
+
+To test the preview banner locally:
+
+1. Add `PUBLIC_BRANCH=preview` to your `.env.local` file
+2. Run `pnpm build`
+3. Run `pnpm preview`
+
 ## Project Structure
 
 ```

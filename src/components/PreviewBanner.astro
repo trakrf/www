@@ -1,0 +1,271 @@
+---
+// Check if we're on the preview branch
+// Cloudflare Pages sets CF_PAGES_BRANCH automatically at build time
+// For local dev, check if we're in dev mode OR if PUBLIC_BRANCH is set
+const isPreview =
+	import.meta.env.CF_PAGES_BRANCH === 'preview' ||
+	import.meta.env.PUBLIC_BRANCH === 'preview' ||
+	import.meta.env.DEV; // Show in dev mode for testing
+
+// Array of silly Monty Python-esque messages
+const messages = [
+	"And now for something completely different... A PREVIEW BRANCH!",
+	"This is a PREVIEW branch. It's not pining, it's passed on!",
+	"Nobody expects the Spanish Inquisition! (Or this preview deployment)",
+	"Your mother was a hamster and your father smelt of elderberries! (This is preview.)",
+	"This preview is an ex-parrot! No wait, it's very much alive!",
+	"We are the knights who say... PREVIEW!",
+	"It's only a model. (It's the preview branch.)",
+	"Strange women lying in ponds distributing swords is no basis for a system of government, but this preview branch is!",
+];
+
+const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+---
+
+{isPreview && (
+	<>
+		<div class="preview-banner" id="preview-banner">
+			<div class="preview-banner-content">
+				<span class="preview-icon">🥥</span>
+				<span class="preview-text">{randomMessage}</span>
+				<span class="preview-icon">🦜</span>
+			</div>
+		</div>
+		<div class="monty-foot" id="monty-foot">🦶</div>
+	</>
+)}
+
+<style>
+	.preview-banner {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 9999;
+		background: linear-gradient(45deg, #ff0000, #ff7700, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+		background-size: 400% 400%;
+		animation: gradient 3s ease infinite, bounce 2s ease-in-out infinite;
+		padding: 0.75rem;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+		border-bottom: 3px solid #000;
+		transform-origin: top center;
+	}
+
+	.preview-banner-content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+		font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+		font-weight: bold;
+		font-size: 1.1rem;
+		color: #000;
+		text-shadow: 2px 2px 0px #fff, -2px -2px 0px #fff, 2px -2px 0px #fff, -2px 2px 0px #fff;
+	}
+
+	.preview-text {
+		animation: wiggle 0.5s ease-in-out infinite;
+	}
+
+	.preview-icon {
+		font-size: 1.5rem;
+		animation: spin 2s linear infinite;
+		display: inline-block;
+	}
+
+	@keyframes gradient {
+		0% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 50%;
+		}
+	}
+
+	@keyframes bounce {
+		0%, 100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-5px);
+		}
+	}
+
+	@keyframes wiggle {
+		0%, 100% {
+			transform: rotate(-1deg);
+		}
+		50% {
+			transform: rotate(1deg);
+		}
+	}
+
+	@keyframes spin {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	/* Monty Python Foot */
+	.monty-foot {
+		position: fixed;
+		top: -500px;
+		left: 50%;
+		transform: translateX(-50%) rotate(-15deg);
+		font-size: 20rem;
+		z-index: 10001;
+		pointer-events: none;
+		opacity: 0;
+		filter: drop-shadow(10px 10px 20px rgba(0, 0, 0, 0.5));
+	}
+
+	.monty-foot.stomping {
+		animation: stomp 1.5s cubic-bezier(0.36, 0, 0.66, -0.56);
+	}
+
+	@keyframes stomp {
+		0% {
+			top: -500px;
+			opacity: 0;
+		}
+		10% {
+			opacity: 1;
+		}
+		50% {
+			top: -50px;
+			opacity: 1;
+		}
+		60% {
+			top: 0px;
+			opacity: 1;
+		}
+		70% {
+			top: 0px;
+			opacity: 1;
+		}
+		100% {
+			top: -500px;
+			opacity: 0;
+		}
+	}
+
+	/* Banner squish effect */
+	.preview-banner.squished {
+		animation: squish 1.5s ease-out;
+	}
+
+	@keyframes squish {
+		0% {
+			transform: scaleY(1);
+		}
+		60% {
+			transform: scaleY(0.3);
+		}
+		70% {
+			transform: scaleY(0.3);
+		}
+		100% {
+			transform: scaleY(1);
+		}
+	}
+
+	/* Add top padding to body to account for fixed banner */
+	:global(body.has-preview-banner) {
+		padding-top: 4rem;
+	}
+
+	@media (max-width: 768px) {
+		.preview-banner-content {
+			font-size: 0.85rem;
+			gap: 0.5rem;
+		}
+
+		.preview-icon {
+			font-size: 1.2rem;
+		}
+
+		.monty-foot {
+			font-size: 12rem;
+		}
+	}
+</style>
+
+<script>
+	// Add class to body if banner is present
+	const banner = document.querySelector('.preview-banner');
+	const foot = document.getElementById('monty-foot');
+
+	if (banner) {
+		document.body.classList.add('has-preview-banner');
+
+		// Generate fart sound using Web Audio API
+		function playFartSound() {
+			try {
+				const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+				const now = audioContext.currentTime;
+
+				// Create oscillator for the "brrrrt" sound
+				const oscillator = audioContext.createOscillator();
+				const gainNode = audioContext.createGain();
+
+				oscillator.connect(gainNode);
+				gainNode.connect(audioContext.destination);
+
+				// Fart-like frequency sweep
+				oscillator.frequency.setValueAtTime(180, now);
+				oscillator.frequency.exponentialRampToValueAtTime(40, now + 0.3);
+
+				// Volume envelope for realistic fart
+				gainNode.gain.setValueAtTime(0.3, now);
+				gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+
+				oscillator.type = 'sawtooth';
+				oscillator.start(now);
+				oscillator.stop(now + 0.3);
+			} catch (e) {
+				console.log('Audio not supported, silent stomp');
+			}
+		}
+
+		// Stomp function
+		function stomp() {
+			if (!foot || !banner) return;
+
+			// Add stomping animation
+			foot.classList.add('stomping');
+			banner.classList.add('squished');
+
+			// Play fart sound when foot hits (600ms into animation)
+			setTimeout(() => {
+				playFartSound();
+			}, 600);
+
+			// Remove classes after animation completes
+			setTimeout(() => {
+				foot.classList.remove('stomping');
+				banner.classList.remove('squished');
+			}, 1500);
+		}
+
+		// Stomp every 20 seconds (random between 15-25 seconds for variety)
+		function scheduleNextStomp() {
+			const delay = 15000 + Math.random() * 10000; // 15-25 seconds
+			setTimeout(() => {
+				stomp();
+				scheduleNextStomp();
+			}, delay);
+		}
+
+		// First stomp after 10 seconds (give user time to see the banner first)
+		setTimeout(() => {
+			stomp();
+			scheduleNextStomp();
+		}, 10000);
+	}
+</script>
