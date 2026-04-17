@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import heroImage from '../../public/images/hero.jpg';
+import heroImage from '../../public/images/product/scanner-trakrf-hero.webp';
 ---
 
 <section
@@ -8,21 +8,35 @@ import heroImage from '../../public/images/hero.jpg';
 >
 	<!-- Text Content -->
 	<div
-		class="flex flex-col items-center justify-center gap-10 text-center lg:items-start lg:gap-14 lg:text-left"
+		class="flex flex-col items-center justify-center gap-8 text-center lg:items-start lg:gap-10 lg:text-left"
 	>
-		<h1 class="text-3xl font-extrabold tracking-tight md:-mb-4 lg:text-5xl">Track Tags Today!</h1>
+		<h1 class="text-3xl font-extrabold tracking-tight lg:text-5xl">
+			The RFID implementation layer for channel partners and integrators
+		</h1>
 		<p class="text-lg leading-relaxed opacity-80">
-			The RFID tracking solution that will have you tracking all the things all the time in no time
-			at all!
+			Browser-based asset tracking. Zero install, no middleware, no driver support calls. Handheld
+			BLE and fixed-reader MQTT paths in one platform.
 		</p>
-		<a href="#signin" class="btn btn-primary btn-wide"> Get Started </a>
+		<div class="flex flex-col gap-3 sm:flex-row">
+			<a
+				href="https://app.trakrf.id"
+				target="_blank"
+				rel="noopener"
+				class="btn btn-primary btn-wide"
+			>
+				Try the free BLE app
+			</a>
+			<a href="#become-partner" class="btn btn-outline btn-wide">
+				Talk to us about partnering
+			</a>
+		</div>
 	</div>
 
 	<!-- Hero Image -->
 	<div class="lg:w-full">
 		<Image
 			src={heroImage}
-			alt="RFID tracking technology - computers and electronics"
+			alt="A handheld RFID scanner paired with the TrakRF web app"
 			class="w-full rounded-lg"
 			widths={[400, 800, 1200]}
 			sizes="(max-width: 768px) 100vw, 50vw"
