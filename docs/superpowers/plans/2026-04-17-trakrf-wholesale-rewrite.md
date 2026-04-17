@@ -20,11 +20,11 @@
 
 **Files:**
 - Create: `public/images/product/` (directory)
-- Create: `public/images/product/scanner-trakrf-hero.jpg`
-- Create: `public/images/product/cs108-handheld.jpg`
-- Create: `public/images/product/tag-sample-pack.jpg`
-- Create: `public/images/product/app-scan-screen.png`
-- Create: `public/images/product/rfidready-logo.{svg|png}`
+- Create: `public/images/product/scanner-trakrf-hero.webp`
+- Create: `public/images/product/cs108-handheld.webp`
+- Create: `public/images/product/tag-sample-pack.webp`
+- Create: `public/images/product/app-scan-screen.webp`
+- Create: `public/images/product/rfidready-logo.webp` (or .svg/.png if that's what rfidready.net serves)
 - Optional: `public/images/product/app-home-screen.png`, `public/images/product/app-locate-screen.png`
 
 - [ ] **Step 1: Create target directory**
@@ -47,7 +47,7 @@ Record the full URL and content-type for each candidate before downloading.
 For every mapped asset, run the equivalent of:
 
 ```bash
-curl -L --fail -o public/images/product/scanner-trakrf-hero.jpg \
+curl -L --fail -o public/images/product/scanner-trakrf-hero.webp \
   'https://rfidready.net/<path>/<source-filename>.jpg'
 ```
 
@@ -363,7 +363,7 @@ git commit -m "feat(tra-336): rewrite Footer with wholesale navigation"
 
 ### Task 4: Rewrite Hero.astro
 
-New hero with wholesale positioning. Primary CTA → app.trakrf.id (external); secondary CTA → `#become-partner`. Image is `scanner-trakrf-hero.jpg` from Task 1 (or text-only variant if missing).
+New hero with wholesale positioning. Primary CTA → app.trakrf.id (external); secondary CTA → `#become-partner`. Image is `scanner-trakrf-hero.webp` from Task 1 (or text-only variant if missing).
 
 **Files:**
 - Modify: `src/components/Hero.astro` (full rewrite)
@@ -373,7 +373,7 @@ New hero with wholesale positioning. Primary CTA → app.trakrf.id (external); s
 ```astro
 ---
 import { Image } from 'astro:assets';
-import heroImage from '../../public/images/product/scanner-trakrf-hero.jpg';
+import heroImage from '../../public/images/product/scanner-trakrf-hero.webp';
 ---
 
 <section
@@ -420,7 +420,7 @@ import heroImage from '../../public/images/product/scanner-trakrf-hero.jpg';
 
 - [ ] **Step 2: Handle missing image gracefully**
 
-If Task 1 could not source `scanner-trakrf-hero.jpg`, replace the `---` frontmatter and the `<!-- Hero Image -->` block with a text-only variant:
+If Task 1 could not source `scanner-trakrf-hero.webp`, replace the `---` frontmatter and the `<!-- Hero Image -->` block with a text-only variant:
 
 ```astro
 ---
@@ -713,7 +713,7 @@ Proof-point section — app.trakrf.id is not a trial funnel, it's a technology d
 import { Image } from 'astro:assets';
 let screenshot: ImageMetadata | null = null;
 try {
-	screenshot = (await import('../../public/images/product/app-scan-screen.png')).default;
+	screenshot = (await import('../../public/images/product/app-scan-screen.webp')).default;
 } catch {
 	screenshot = null;
 }
@@ -811,10 +811,10 @@ import { Image } from 'astro:assets';
 let cs108Img: ImageMetadata | null = null;
 let tagsImg: ImageMetadata | null = null;
 try {
-	cs108Img = (await import('../../public/images/product/cs108-handheld.jpg')).default;
+	cs108Img = (await import('../../public/images/product/cs108-handheld.webp')).default;
 } catch {}
 try {
-	tagsImg = (await import('../../public/images/product/tag-sample-pack.jpg')).default;
+	tagsImg = (await import('../../public/images/product/tag-sample-pack.webp')).default;
 } catch {}
 
 const supported = [
@@ -973,12 +973,8 @@ Use whichever extension Task 1 landed for the logo. If neither is present, the c
 import { Image } from 'astro:assets';
 let rfidReadyLogo: ImageMetadata | null = null;
 try {
-	rfidReadyLogo = (await import('../../public/images/product/rfidready-logo.png')).default;
-} catch {
-	try {
-		rfidReadyLogo = (await import('../../public/images/product/rfidready-logo.svg')).default;
-	} catch {}
-}
+	rfidReadyLogo = (await import('../../public/images/product/rfidready-logo.webp')).default;
+} catch {}
 ---
 
 <section id="partners" class="bg-base-200">
