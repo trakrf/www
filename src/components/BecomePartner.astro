@@ -1,0 +1,31 @@
+---
+const bookingUrl = 'https://calendar.app.google/Hv1Bsm8Mc4wjPaJV8';
+const partnerEmail = 'partners@trakrf.id';
+---
+
+<section id="become-partner" class="bg-primary text-primary-content">
+	<div class="mx-auto max-w-3xl px-8 py-24 text-center">
+		<p class="mb-2 font-medium uppercase tracking-widest opacity-80">Become a partner</p>
+		<h2 class="text-3xl font-bold tracking-tight lg:text-4xl">
+			Let's talk about reselling TrakRF
+		</h2>
+		<p class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed opacity-90">
+			We're looking for distributors, systems integrators, and MSPs with industrial and
+			logistics customers. 30 minutes is enough to see the platform, hear your use case, and
+			decide if it's a fit.
+		</p>
+		<div class="mt-8 flex flex-col items-center gap-4">
+			<a
+				href={bookingUrl}
+				target="_blank"
+				rel="noopener"
+				class="btn btn-neutral btn-wide"
+			>
+				Book a 30-min intro call
+			</a>
+			<p class="text-sm opacity-90">
+				Or email <a href={`mailto:${partnerEmail}`} class="link underline">{partnerEmail}</a>
+			</p>
+		</div>
+	</div>
+</section>
