@@ -1,36 +1,27 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
-import Problem from '../components/Problem.astro';
-import FeaturesAccordion from '../components/FeaturesAccordion.astro';
-import Pricing from '../components/Pricing.astro';
-import FAQ from '../components/FAQ.astro';
-import CTA from '../components/CTA.astro';
 
-const title = 'TrakRF - Track Tags Today!';
-const description = 'RFID right now: read tags today!';
+const title = 'TrakRF — The RFID implementation layer';
+const description =
+	'Browser-based RFID and BLE asset tracking for channel partners and integrators. Zero install, no middleware, no driver support calls.';
 ---
 
 <BaseLayout title={title} description={description}>
 	<main>
 		<Hero />
-		<Problem />
-		<FeaturesAccordion />
-		<Pricing />
-		<FAQ />
-		<CTA />
 	</main>
 
 	<script>
-		// Smooth scroll to hash anchors
+		// Smooth scroll to in-page hash anchors
 		document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((anchor) => {
 			anchor.addEventListener('click', function (e: Event) {
 				const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
-				if (href === '#' || href === '#signin' || href === '#checkout') return;
+				if (!href || href === '#') return;
 
-				e.preventDefault();
-				const target = href ? document.querySelector(href) : null;
+				const target = document.querySelector(href);
 				if (target) {
+					e.preventDefault();
 					target.scrollIntoView({ behavior: 'smooth' });
 				}
 			});
