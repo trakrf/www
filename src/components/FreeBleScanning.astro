@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+let screenshot: ImageMetadata | null = null;
+try {
+	screenshot = (await import('../../public/images/product/app-scan-screen.webp')).default;
+} catch {
+	screenshot = null;
+}
+---
+
+<section class="bg-base-200">
+	<div class="mx-auto max-w-7xl px-8 py-24">
+		<div class="flex flex-col items-center gap-12 lg:flex-row">
+			<div class="flex basis-1/2 flex-col gap-6 text-center lg:text-left">
+				<p class="font-medium text-primary">Free BLE scanning</p>
+				<h2 class="text-3xl font-bold tracking-tight lg:text-4xl">
+					Touch the product in under a minute
+				</h2>
+				<p class="text-lg leading-relaxed opacity-80">
+					<code class="rounded bg-base-300 px-1.5 py-0.5 text-base">app.trakrf.id</code> is a
+					proof point, not a trial funnel. Open it in a Bluetooth-capable browser, pair a CSL
+					CS108, and scan — no account, no download, no middleware. Technical evaluators can
+					verify the platform end-to-end without a sales conversation.
+				</p>
+				<div class="flex justify-center lg:justify-start">
+					<a
+						href="https://app.trakrf.id"
+						target="_blank"
+						rel="noopener"
+						class="btn btn-primary btn-wide"
+					>
+						Open app.trakrf.id
+					</a>
+				</div>
+			</div>
+
+			<div class="basis-1/2">
+				{
+					screenshot ? (
+						<Image
+							src={screenshot}
+							alt="TrakRF web app scan screen"
+							class="mx-auto w-full max-w-md rounded-lg border border-base-content/10 shadow-lg"
+							widths={[360, 720]}
+							sizes="(max-width: 768px) 100vw, 50vw"
+						/>
+					) : (
+						<div class="mx-auto w-full max-w-md rounded-lg border border-dashed border-base-content/20 p-8 text-center text-sm text-base-content/60">
+							Screenshot coming soon
+						</div>
+					)
+				}
+			</div>
+		</div>
+	</div>
+</section>
