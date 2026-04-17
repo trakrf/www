@@ -3,9 +3,9 @@ import { Image } from 'astro:assets';
 import logo from '../../public/images/icon.png';
 
 const links = [
-	{ href: '/#pricing', label: 'Pricing' },
-	{ href: '/#faq', label: 'FAQ' },
-	{ href: 'https://handheld.trakrf.id', label: 'Read Tags' }
+	{ href: '#how-it-works', label: 'How it works' },
+	{ href: '#hardware', label: 'Hardware' },
+	{ href: '#partners', label: 'Partners' }
 ];
 ---
 
@@ -34,7 +34,14 @@ const links = [
 
 		<!-- Desktop CTA -->
 		<div class="hidden lg:flex lg:flex-1 lg:justify-end">
-			<a href="#signin" class="btn btn-primary">Sign In</a>
+			<a
+				href="https://app.trakrf.id"
+				target="_blank"
+				rel="noopener"
+				class="btn btn-primary"
+			>
+				Try the free app
+			</a>
 		</div>
 
 		<!-- Mobile menu button -->
@@ -43,6 +50,7 @@ const links = [
 				type="button"
 				class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5"
 				@click="mobileMenuOpen = true"
+				aria-label="Open main menu"
 			>
 				<span class="sr-only">Open main menu</span>
 				<svg
@@ -51,6 +59,7 @@ const links = [
 					viewBox="0 0 24 24"
 					stroke-width="1.5"
 					stroke="currentColor"
+					aria-hidden="true"
 				>
 					<path
 						stroke-linecap="round"
@@ -79,7 +88,12 @@ const links = [
 				<a href="/" class="-m-1.5 p-1.5">
 					<Image src={logo} alt="TrakRF" class="w-8" />
 				</a>
-				<button type="button" class="-m-2.5 rounded-md p-2.5" @click="mobileMenuOpen = false">
+				<button
+					type="button"
+					class="-m-2.5 rounded-md p-2.5"
+					@click="mobileMenuOpen = false"
+					aria-label="Close menu"
+				>
 					<span class="sr-only">Close menu</span>
 					<svg
 						class="h-6 w-6 text-base-content"
@@ -87,6 +101,7 @@ const links = [
 						viewBox="0 0 24 24"
 						stroke-width="1.5"
 						stroke="currentColor"
+						aria-hidden="true"
 					>
 						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
 					</svg>
@@ -96,13 +111,20 @@ const links = [
 				<div class="flex flex-col items-start gap-y-4">
 					{
 						links.map((link) => (
-							<a href={link.href} class="link-hover link">
+							<a href={link.href} class="link-hover link" @click="mobileMenuOpen = false">
 								{link.label}
 							</a>
 						))
 					}
 					<div class="divider"></div>
-					<a href="#signin" class="btn btn-primary w-full">Sign In</a>
+					<a
+						href="https://app.trakrf.id"
+						target="_blank"
+						rel="noopener"
+						class="btn btn-primary w-full"
+					>
+						Try the free app
+					</a>
 				</div>
 			</div>
 		</div>
