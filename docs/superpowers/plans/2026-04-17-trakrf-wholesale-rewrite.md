@@ -19,6 +19,7 @@
 ### Task 1: Scrape product images from rfidready.net
 
 **Files:**
+
 - Create: `public/images/product/` (directory)
 - Create: `public/images/product/scanner-trakrf-hero.webp`
 - Create: `public/images/product/cs108-handheld.webp`
@@ -34,6 +35,7 @@ Run: `mkdir -p public/images/product`
 - [ ] **Step 2: Enumerate candidate image URLs on rfidready.net**
 
 Use WebFetch against `https://rfidready.net/` and any linked product/solution pages to harvest image URLs. Look specifically for:
+
 - Composite image showing a handheld scanner next to the TrakRF app (hero candidate)
 - CS108 handheld with mount (product photo)
 - Tag sample pack (loose tags fanned out)
@@ -82,6 +84,7 @@ git commit -m "chore(tra-336): scrape product imagery from rfidready.net"
 New nav: How it works / Hardware / Partners, plus a primary "Try the free app" button linking to app.trakrf.id. Remove Pricing, FAQ, Sign In, and the `handheld.trakrf.id` link. Mobile menu is preserved (Alpine.js).
 
 **Files:**
+
 - Modify: `src/components/Header.astro` (full rewrite)
 
 - [ ] **Step 1: Replace the entire contents of `src/components/Header.astro` with the following**
@@ -123,12 +126,7 @@ const links = [
 
 		<!-- Desktop CTA -->
 		<div class="hidden lg:flex lg:flex-1 lg:justify-end">
-			<a
-				href="https://app.trakrf.id"
-				target="_blank"
-				rel="noopener"
-				class="btn btn-primary"
-			>
+			<a href="https://app.trakrf.id" target="_blank" rel="noopener" class="btn btn-primary">
 				Try the free app
 			</a>
 		</div>
@@ -231,6 +229,7 @@ Expected: passes. Astro may still warn about unused imports elsewhere; only fail
 Run: `pnpm dev` (leave running through subsequent tasks)
 Open: `http://localhost:4321/`
 Check:
+
 - Header shows logo + three nav links + "Try the free app" button on desktop
 - Mobile menu button visible below `lg` breakpoint; clicking it opens the drawer with the same links + button
 - "Try the free app" opens `https://app.trakrf.id` in a new tab
@@ -251,6 +250,7 @@ git commit -m "feat(tra-336): rewrite Header for wholesale positioning"
 Three-column footer: Platform (app.trakrf.id external), Partners (rfidready.net external, Become a partner anchor), Legal (ToS, Privacy). Copyright becomes "© YYYY DevOps To AI LLC dba TrakRF". Remove `/#pricing` link, `/blog` link, and the generic Support mailto (superseded by the Become a partner section).
 
 **Files:**
+
 - Modify: `src/components/Footer.astro` (full rewrite)
 
 - [ ] **Step 1: Replace the entire contents of `src/components/Footer.astro` with the following**
@@ -290,12 +290,7 @@ const currentYear = new Date().getFullYear();
 						PLATFORM
 					</div>
 					<div class="mb-10 flex flex-col items-center justify-center gap-2 text-sm md:items-start">
-						<a
-							href="https://app.trakrf.id"
-							target="_blank"
-							rel="noopener"
-							class="link-hover link"
-						>
+						<a href="https://app.trakrf.id" target="_blank" rel="noopener" class="link-hover link">
 							Free BLE app
 						</a>
 					</div>
@@ -309,12 +304,7 @@ const currentYear = new Date().getFullYear();
 						PARTNERS
 					</div>
 					<div class="mb-10 flex flex-col items-center justify-center gap-2 text-sm md:items-start">
-						<a
-							href="https://rfidready.net"
-							target="_blank"
-							rel="noopener"
-							class="link-hover link"
-						>
+						<a href="https://rfidready.net" target="_blank" rel="noopener" class="link-hover link">
 							rfidReady
 						</a>
 						<a href="#become-partner" class="link-hover link"> Become a partner </a>
@@ -347,6 +337,7 @@ Expected: passes.
 - [ ] **Step 3: Smoke-test**
 
 Reload `http://localhost:4321/`. Check:
+
 - Three columns visible on desktop (Platform / Partners / Legal)
 - rfidReady link opens rfidready.net in new tab
 - Become a partner link targets `#become-partner` (will no-op until that section exists; fine for now)
@@ -366,6 +357,7 @@ git commit -m "feat(tra-336): rewrite Footer with wholesale navigation"
 New hero with wholesale positioning. Primary CTA → app.trakrf.id (external); secondary CTA → `#become-partner`. Image is `scanner-trakrf-hero.webp` from Task 1 (or text-only variant if missing).
 
 **Files:**
+
 - Modify: `src/components/Hero.astro` (full rewrite)
 
 - [ ] **Step 1: Replace the entire contents of `src/components/Hero.astro` with the following**
@@ -399,9 +391,7 @@ import heroImage from '../../public/images/product/scanner-trakrf-hero.webp';
 			>
 				Try the free BLE app
 			</a>
-			<a href="#become-partner" class="btn btn-outline btn-wide">
-				Talk to us about partnering
-			</a>
+			<a href="#become-partner" class="btn btn-outline btn-wide"> Talk to us about partnering </a>
 		</div>
 	</div>
 
@@ -424,15 +414,14 @@ If Task 1 could not source `scanner-trakrf-hero.webp`, replace the `---` frontma
 
 ```astro
 ---
+
 ---
 
 <section
 	class="mx-auto flex max-w-7xl flex-col items-center justify-center gap-16 bg-base-100 px-8 py-16 lg:py-24"
 >
 	<!-- Text Content (centered, no image) -->
-	<div
-		class="flex max-w-4xl flex-col items-center justify-center gap-8 text-center lg:gap-10"
-	>
+	<div class="flex max-w-4xl flex-col items-center justify-center gap-8 text-center lg:gap-10">
 		<h1 class="text-3xl font-extrabold tracking-tight lg:text-5xl">
 			The RFID implementation layer for channel partners and integrators
 		</h1>
@@ -449,9 +438,7 @@ If Task 1 could not source `scanner-trakrf-hero.webp`, replace the `---` frontma
 			>
 				Try the free BLE app
 			</a>
-			<a href="#become-partner" class="btn btn-outline btn-wide">
-				Talk to us about partnering
-			</a>
+			<a href="#become-partner" class="btn btn-outline btn-wide"> Talk to us about partnering </a>
 		</div>
 	</div>
 </section>
@@ -465,6 +452,7 @@ Expected: passes. If Astro complains about the image import when the file is mis
 - [ ] **Step 4: Smoke-test**
 
 Reload `http://localhost:4321/`. Check:
+
 - New H1 copy renders
 - Both buttons present
 - Image loads if present; no broken-image icon
@@ -485,6 +473,7 @@ git commit -m "feat(tra-336): rewrite Hero with wholesale positioning"
 Before deleting obsolete components we must stop importing them. This task leaves the page at "just the new Hero" so the delete in Task 6 is clean.
 
 **Files:**
+
 - Modify: `src/pages/index.astro` (full rewrite)
 
 - [ ] **Step 1: Replace the entire contents of `src/pages/index.astro` with the following**
@@ -545,6 +534,7 @@ git commit -m "chore(tra-336): reduce index.astro to Hero-only as transition poi
 ### Task 6: Delete obsolete ShipFast components
 
 **Files:**
+
 - Delete: `src/components/Problem.astro`
 - Delete: `src/components/FeaturesAccordion.astro`
 - Delete: `src/components/Pricing.astro`
@@ -600,6 +590,7 @@ Each task creates one component and inserts it into `src/pages/index.astro` in t
 Two-lane architecture overview — handheld (Web BLE) + fixed (MQTT). No photos.
 
 **Files:**
+
 - Create: `src/components/HowItWorks.astro`
 - Modify: `src/pages/index.astro`
 
@@ -611,14 +602,12 @@ const lanes = [
 	{
 		title: 'Handheld · Web BLE',
 		flow: 'Browser → Web BLE → CS108 (or any supported BLE reader)',
-		body:
-			'A Bluetooth-capable browser talks directly to the handheld. Tags stream into the TrakRF web app; a Web Worker decodes the read stream so the UI stays responsive. No installs, no drivers, no support tickets for USB cables.'
+		body: 'A Bluetooth-capable browser talks directly to the handheld. Tags stream into the TrakRF web app; a Web Worker decodes the read stream so the UI stays responsive. No installs, no drivers, no support tickets for USB cables.'
 	},
 	{
 		title: 'Fixed · MQTT',
 		flow: 'LLRP reader → MQTT (direct or via Pi 5 edge relay) → Browser',
-		body:
-			'Fixed readers publish to MQTT — directly if the reader supports native MQTT, or through the TrakRF Pi 5 edge relay for LLRP-only hardware. The browser subscribes and renders reads through the same UI and data model as the handheld path.'
+		body: 'Fixed readers publish to MQTT — directly if the reader supports native MQTT, or through the TrakRF Pi 5 edge relay for LLRP-only hardware. The browser subscribes and renders reads through the same UI and data model as the handheld path.'
 	}
 ];
 ---
@@ -703,6 +692,7 @@ git commit -m "feat(tra-336): add HowItWorks section"
 Proof-point section — app.trakrf.id is not a trial funnel, it's a technology demonstrator.
 
 **Files:**
+
 - Create: `src/components/FreeBleScanning.astro`
 - Modify: `src/pages/index.astro`
 
@@ -728,10 +718,10 @@ try {
 					Touch the product in under a minute
 				</h2>
 				<p class="text-lg leading-relaxed opacity-80">
-					<code class="rounded bg-base-300 px-1.5 py-0.5 text-base">app.trakrf.id</code> is a
-					proof point, not a trial funnel. Open it in a Bluetooth-capable browser, pair a CSL
-					CS108, and scan — no account, no download, no middleware. Technical evaluators can
-					verify the platform end-to-end without a sales conversation.
+					<code class="rounded bg-base-300 px-1.5 py-0.5 text-base">app.trakrf.id</code> is a proof point,
+					not a trial funnel. Open it in a Bluetooth-capable browser, pair a CSL CS108, and scan — no
+					account, no download, no middleware. Technical evaluators can verify the platform end-to-end
+					without a sales conversation.
 				</p>
 				<div class="flex justify-center lg:justify-start">
 					<a
@@ -799,6 +789,7 @@ git commit -m "feat(tra-336): add FreeBleScanning proof-point section"
 Two-tier grid: Supported today + On roadmap. Uses scraped images for CS108 and tag sample pack where available; text-only cards otherwise.
 
 **Files:**
+
 - Create: `src/components/Hardware.astro`
 - Modify: `src/pages/index.astro`
 
@@ -879,8 +870,8 @@ const roadmap = [
 				Any LLRP reader today. More on the roadmap.
 			</h2>
 			<p class="mx-auto mt-4 max-w-3xl text-base-content/80">
-				The Pi 5 edge relay covers every LLRP reader in the field right now. The roadmap
-				focuses on readers with native MQTT so deployments can skip the edge device.
+				The Pi 5 edge relay covers every LLRP reader in the field right now. The roadmap focuses on
+				readers with native MQTT so deployments can skip the edge device.
 			</p>
 		</div>
 
@@ -912,9 +903,7 @@ const roadmap = [
 
 		<h3 class="mb-6 flex items-center gap-2 text-xl font-semibold">
 			<span class="badge badge-warning badge-lg">On roadmap</span>
-			<span class="text-sm font-normal text-base-content/60">
-				Prioritized by partner demand
-			</span>
+			<span class="text-sm font-normal text-base-content/60"> Prioritized by partner demand </span>
 		</h3>
 		<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 			{
@@ -961,6 +950,7 @@ git commit -m "feat(tra-336): add Hardware section with supported/roadmap tiers"
 rfidReady card (logo if scraped; wordmark fallback) + "more coming" placeholder.
 
 **Files:**
+
 - Create: `src/components/ChannelPartners.astro`
 - Modify: `src/pages/index.astro`
 
@@ -981,12 +971,10 @@ try {
 	<div class="mx-auto max-w-7xl px-8 py-24">
 		<div class="mb-12 text-center">
 			<p class="mb-2 font-medium text-primary">Channel partners</p>
-			<h2 class="text-3xl font-bold tracking-tight lg:text-4xl">
-				TrakRF is wholesale-only
-			</h2>
+			<h2 class="text-3xl font-bold tracking-tight lg:text-4xl">TrakRF is wholesale-only</h2>
 			<p class="mx-auto mt-4 max-w-2xl text-base-content/80">
-				Our channel partners handle pricing, implementation services, and customer support.
-				If you're an end customer, start with one of our partners.
+				Our channel partners handle pricing, implementation services, and customer support. If
+				you're an end customer, start with one of our partners.
 			</p>
 		</div>
 
@@ -1011,8 +999,8 @@ try {
 					)
 				}
 				<p class="text-sm text-base-content/70">
-					Primary channel partner — inventory, integration services, and customer support
-					across North America.
+					Primary channel partner — inventory, integration services, and customer support across
+					North America.
 				</p>
 				<span class="text-sm font-medium text-primary">rfidready.net →</span>
 			</a>
@@ -1020,9 +1008,7 @@ try {
 			<div
 				class="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed border-base-content/20 p-8 text-center"
 			>
-				<span class="text-2xl font-bold tracking-tight text-base-content/40">
-					Your logo here
-				</span>
+				<span class="text-2xl font-bold tracking-tight text-base-content/40"> Your logo here </span>
 				<p class="text-sm text-base-content/70">
 					Additional partners listed as agreements finalize. Interested? See
 					<a class="link link-primary" href="#become-partner">Become a partner</a>.
@@ -1065,6 +1051,7 @@ git commit -m "feat(tra-336): add ChannelPartners section with rfidReady"
 Primary Google Calendar booking button + secondary mailto.
 
 **Files:**
+
 - Create: `src/components/BecomePartner.astro`
 - Modify: `src/pages/index.astro`
 
@@ -1079,21 +1066,14 @@ const partnerEmail = 'partners@trakrf.id';
 <section id="become-partner" class="bg-primary text-primary-content">
 	<div class="mx-auto max-w-3xl px-8 py-24 text-center">
 		<p class="mb-2 font-medium uppercase tracking-widest opacity-80">Become a partner</p>
-		<h2 class="text-3xl font-bold tracking-tight lg:text-4xl">
-			Let's talk about reselling TrakRF
-		</h2>
+		<h2 class="text-3xl font-bold tracking-tight lg:text-4xl">Let's talk about reselling TrakRF</h2>
 		<p class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed opacity-90">
-			We're looking for distributors, systems integrators, and MSPs with industrial and
-			logistics customers. 30 minutes is enough to see the platform, hear your use case, and
-			decide if it's a fit.
+			We're looking for distributors, systems integrators, and MSPs with industrial and logistics
+			customers. 30 minutes is enough to see the platform, hear your use case, and decide if it's a
+			fit.
 		</p>
 		<div class="mt-8 flex flex-col items-center gap-4">
-			<a
-				href={bookingUrl}
-				target="_blank"
-				rel="noopener"
-				class="btn btn-neutral btn-wide"
-			>
+			<a href={bookingUrl} target="_blank" rel="noopener" class="btn btn-neutral btn-wide">
 				Book a 30-min intro call
 			</a>
 			<p class="text-sm opacity-90">
@@ -1137,6 +1117,7 @@ git commit -m "feat(tra-336): add BecomePartner section with booking + mailto"
 Four-item grid: License (BSL), Self-hosting, API-first, Integration-ready.
 
 **Files:**
+
 - Create: `src/components/TechnicalDetails.astro`
 - Modify: `src/pages/index.astro`
 
@@ -1147,23 +1128,19 @@ Four-item grid: License (BSL), Self-hosting, API-first, Integration-ready.
 const details = [
 	{
 		title: 'License',
-		body:
-			'Business Source License (BSL). Self-hosting is included. Commercial resale is governed by the partner agreement.'
+		body: 'Business Source License (BSL). Self-hosting is included. Commercial resale is governed by the partner agreement.'
 	},
 	{
 		title: 'Self-hosting',
-		body:
-			'Run the full stack on partner or customer infrastructure. No mandatory TrakRF-hosted dependency for operational data.'
+		body: 'Run the full stack on partner or customer infrastructure. No mandatory TrakRF-hosted dependency for operational data.'
 	},
 	{
 		title: 'API-first',
-		body:
-			'Every action in the web app is an API call. The same endpoints power TeamCentral-style integrations and third-party automation.'
+		body: 'Every action in the web app is an API call. The same endpoints power TeamCentral-style integrations and third-party automation.'
 	},
 	{
 		title: 'Integration-ready',
-		body:
-			'MQTT, REST, and webhooks out of the box. Pair with Pi 5 edge relay to bridge LLRP readers and existing event buses.'
+		body: 'MQTT, REST, and webhooks out of the box. Pair with Pi 5 edge relay to bridge LLRP readers and existing event buses.'
 	}
 ];
 ---
@@ -1256,6 +1233,7 @@ git commit -m "feat(tra-336): add TechnicalDetails section and finalize index co
 The old stock-photo hero is no longer referenced. Delete it.
 
 **Files:**
+
 - Delete: `public/images/hero.jpg`
 
 - [ ] **Step 1: Confirm nothing references it**

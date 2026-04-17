@@ -30,6 +30,7 @@ The current trakrf.id is a ShipFast-derived template with consumer-pitch compone
 ## Out of scope
 
 Explicitly NOT in this ticket:
+
 - Pricing anywhere on the site (channel partners set their own customer-facing prices)
 - Stripe, checkout, or signup flows
 - Trial signup optimization
@@ -47,6 +48,7 @@ Single-page Astro site. `src/pages/index.astro` is rewritten to compose eight ne
 ### Component inventory
 
 **Deleted (5):**
+
 - `src/components/Problem.astro` — consumer-failure framing
 - `src/components/FeaturesAccordion.astro` — generic feature pitch
 - `src/components/Pricing.astro` — no direct-sale model
@@ -54,6 +56,7 @@ Single-page Astro site. `src/pages/index.astro` is rewritten to compose eight ne
 - `src/components/FAQ.astro` — consumer-framed ("Can I get a refund?"), no replacement in this ticket
 
 **New (6):**
+
 - `src/components/HowItWorks.astro` — architecture overview: handheld Web BLE path + fixed-reader MQTT path, Web Worker for UI responsiveness
 - `src/components/FreeBleScanning.astro` — app.trakrf.id free tier as proof point, primary "Try it now" external link
 - `src/components/Hardware.astro` — two-tier hardware grid: Supported today + On roadmap
@@ -62,11 +65,13 @@ Single-page Astro site. `src/pages/index.astro` is rewritten to compose eight ne
 - `src/components/TechnicalDetails.astro` — BSL license, self-hosting, API-first, integration-ready
 
 **Rewritten in place (3):**
+
 - `src/components/Hero.astro` — wholesale/platform positioning with "Scanner + TrakRF" composite as hero image
 - `src/components/Header.astro` — new nav + external CTA, mobile menu preserved
 - `src/components/Footer.astro` — dead links removed, ShipFast artifacts removed, copyright updated
 
 **Unchanged:**
+
 - `src/components/PreviewBanner.astro` — preview-branch indicator (independent concern)
 - `src/layouts/BaseLayout.astro` — layout shell, Alpine.js script, meta tags
 - `src/pages/privacy-policy.astro`, `src/pages/tos.astro` — legal pages remain linked from footer
@@ -93,6 +98,7 @@ Header and Footer continue to wrap via `BaseLayout.astro`. The existing smooth-s
 **Image:** `scanner-trakrf-hero.jpg` (Scanner + TrakRF composite scraped from rfidready.net), right-side on desktop, stacked on mobile. Replaces the existing `public/images/hero.jpg` stock photo.
 
 **Copy:**
+
 - H1: "The RFID implementation layer for channel partners and integrators"
 - Sub: "Browser-based asset tracking. Zero install, no middleware, no driver support calls. Handheld BLE and fixed-reader MQTT paths in one platform."
 - Primary CTA: "Try the free BLE app" → `https://app.trakrf.id` (external)
@@ -103,11 +109,13 @@ Header and Footer continue to wrap via `BaseLayout.astro`. The existing smooth-s
 Two-lane architecture overview, no photo. Inline SVG or pure-Tailwind diagram (simple boxes + arrows) showing the two data paths. Total ~120 words across the two lanes.
 
 **Handheld lane:**
+
 - Browser on Bluetooth-capable device → CSL CS108 (or similar BLE reader) via Web BLE
 - Reads go directly to the TrakRF web app; Web Worker decodes the tag stream so the UI stays responsive
 - No installs, no driver support calls
 
 **Fixed lane:**
+
 - LLRP readers (Impinj Speedway, CSL CS463) → MQTT (direct or via Pi 5 edge relay) → TrakRF web app
 - Same UI and data model as the handheld path; same Web Worker architecture
 
@@ -122,6 +130,7 @@ CTA: "Open app.trakrf.id" (external).
 Two-tier card grid. Each card: name, short spec line, integration path note, optional product photo (scraped or omitted per availability), optional vendor "Spec sheet" link.
 
 **Supported today** (green check badge):
+
 - CSL CS108 — handheld UHF, direct BLE
 - CSL CS463 — fixed UHF, direct MQTT
 - Impinj Speedway R420 — fixed UHF, via Pi 5 edge relay (already in production on OMH)
@@ -129,6 +138,7 @@ Two-tier card grid. Each card: name, short spec line, integration path note, opt
 - Pi 5 edge server — LLRP → MQTT bridge; enables any LLRP reader today
 
 **On roadmap** (clock badge, captioned "Prioritized by partner demand"):
+
 - Impinj R700 — native MQTT, no edge relay needed
 - Impinj xArray / later Speedway revisions
 - Chainway C72 / C66 — Android handheld, BLE
@@ -157,6 +167,7 @@ Delivery for partners@trakrf.id currently routes via partners@devopstoai.com (tr
 ### 7. Technical details
 
 Four-item grid or two-column list:
+
 - **License:** Business Source License (BSL) with self-hosting rights
 - **Self-hosting:** Run the full stack on partner or customer infrastructure
 - **API-first:** Every app action is an API call (enables TeamCentral-style integrations)
@@ -167,6 +178,7 @@ Four-item grid or two-column list:
 Logo + one-line tagline ("The RFID implementation layer").
 
 Three link columns:
+
 - **Platform** — app.trakrf.id (external)
 - **Partners** — rfidready.net (external), Become a partner (anchor `#become-partner`)
 - **Legal** — Terms of services, Privacy policy
@@ -178,6 +190,7 @@ Removed from current footer: `/#pricing` link, `/blog` link, "Support" mailto (f
 ## Navigation (Header)
 
 Desktop:
+
 - Logo (links to `/`)
 - How it works (anchor)
 - Hardware (anchor)
@@ -193,6 +206,7 @@ Removed from current header: Pricing link, FAQ link, Sign In button, `handheld.t
 All images live under `public/images/product/`. Sourced by scraping rfidready.net during implementation (`curl` + direct image URLs from the live site). No AI-generated or stock fallbacks.
 
 Target filenames:
+
 - `scanner-trakrf-hero.jpg` — Scanner + TrakRF composite (Hero)
 - `cs108-handheld.jpg` — CS108 with mount (Hardware)
 - `tag-sample-pack.jpg` — tag sample pack (Hardware)
@@ -208,6 +222,7 @@ The existing `public/images/hero.jpg` (stock photo) is removed along with any re
 ## Validation
 
 Aligned with `spec/stack.md`:
+
 - `pnpm lint` — Prettier + ESLint, must pass cleanly
 - `pnpm typecheck` — Astro TypeScript checker, zero errors
 - `pnpm build` — static site builds successfully

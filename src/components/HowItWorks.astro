@@ -3,14 +3,12 @@ const lanes = [
 	{
 		title: 'Handheld · Web BLE',
 		flow: 'Browser → Web BLE → CS108 (or any supported BLE reader)',
-		body:
-			'A Bluetooth-capable browser talks directly to the handheld. Tags stream into the TrakRF web app; a Web Worker decodes the read stream so the UI stays responsive. No installs, no drivers, no support tickets for USB cables.'
+		body: 'A Bluetooth-capable browser talks directly to the handheld. Tags stream into the TrakRF web app; a Web Worker decodes the read stream so the UI stays responsive. No installs, no drivers, no support tickets for USB cables.'
 	},
 	{
 		title: 'Fixed · MQTT',
 		flow: 'LLRP reader → MQTT (direct or via Pi 5 edge relay) → Browser',
-		body:
-			'Fixed readers publish to MQTT — directly if the reader supports native MQTT, or through the TrakRF Pi 5 edge relay for LLRP-only hardware. The browser subscribes and renders reads through the same UI and data model as the handheld path.'
+		body: 'Fixed readers publish to MQTT — directly if the reader supports native MQTT, or through the TrakRF Pi 5 edge relay for LLRP-only hardware. The browser subscribes and renders reads through the same UI and data model as the handheld path.'
 	}
 ];
 ---
