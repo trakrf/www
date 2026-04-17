@@ -1,6 +1,9 @@
 ---
 import { Image } from 'astro:assets';
-import heroImage from '../../public/images/product/scanner-trakrf-hero.webp';
+let heroImage: ImageMetadata | null = null;
+try {
+	heroImage = (await import('../../public/images/product/scanner-trakrf-hero.webp')).default;
+} catch {}
 ---
 
 <section
@@ -31,13 +34,17 @@ import heroImage from '../../public/images/product/scanner-trakrf-hero.webp';
 	</div>
 
 	<!-- Hero Image -->
-	<div class="lg:w-full">
-		<Image
-			src={heroImage}
-			alt="A handheld RFID scanner paired with the TrakRF web app"
-			class="w-full rounded-lg"
-			widths={[400, 800, 1200]}
-			sizes="(max-width: 768px) 100vw, 50vw"
-		/>
-	</div>
+	{
+		heroImage && (
+			<div class="lg:w-full">
+				<Image
+					src={heroImage}
+					alt="A handheld RFID scanner paired with the TrakRF web app"
+					class="w-full rounded-lg"
+					widths={[400, 800, 1200]}
+					sizes="(max-width: 768px) 100vw, 50vw"
+				/>
+			</div>
+		)
+	}
 </section>
