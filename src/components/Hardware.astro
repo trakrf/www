@@ -1,0 +1,129 @@
+---
+import { Image } from 'astro:assets';
+
+let cs108Img: ImageMetadata | null = null;
+let tagsImg: ImageMetadata | null = null;
+try {
+	cs108Img = (await import('../../public/images/product/cs108-handheld.webp')).default;
+} catch {}
+try {
+	tagsImg = (await import('../../public/images/product/tag-sample-pack.webp')).default;
+} catch {}
+
+interface Device {
+	name: string;
+	spec: string;
+	integration: string;
+	image: ImageMetadata | null;
+	alt: string | null;
+}
+
+const supported: Device[] = [
+	{
+		name: 'CSL CS108',
+		spec: 'Handheld UHF · BLE · iOS/Android/Browser',
+		integration: 'Direct BLE to browser',
+		image: cs108Img,
+		alt: 'CSL CS108 handheld RFID reader'
+	},
+	{
+		name: 'CSL CS463',
+		spec: 'Fixed UHF · 4 antennas · PoE',
+		integration: 'Direct MQTT',
+		image: null,
+		alt: null
+	},
+	{
+		name: 'Impinj Speedway R420',
+		spec: 'Fixed UHF · 4 antennas · LLRP',
+		integration: 'Via Pi 5 edge relay (in production on OMH)',
+		image: null,
+		alt: null
+	},
+	{
+		name: 'GL-S10 gateway',
+		spec: 'MQTT bridge for LLRP readers',
+		integration: 'LLRP → MQTT on a compact gateway',
+		image: null,
+		alt: null
+	},
+	{
+		name: 'Pi 5 edge server',
+		spec: 'TrakRF edge software on Raspberry Pi 5',
+		integration: 'Enables any LLRP reader today',
+		image: null,
+		alt: null
+	},
+	{
+		name: 'Tag sample pack',
+		spec: 'UHF inlays for pilots and testing',
+		integration: 'Included in partner evaluation kits',
+		image: tagsImg,
+		alt: 'Assorted UHF RFID tag inlays'
+	}
+];
+
+const roadmap = [
+	{ name: 'Impinj R700', note: 'Native MQTT — skip the edge relay' },
+	{ name: 'Impinj xArray / later Speedway', note: 'Fixed UHF family' },
+	{ name: 'Chainway C72 / C66', note: 'Android handheld, BLE' },
+	{ name: 'TSL 1153 / 2166', note: 'BLE sled' },
+	{ name: 'Zebra RFD8500 / FX9600', note: 'Handheld + fixed' }
+];
+---
+
+<section id="hardware" class="bg-base-100">
+	<div class="mx-auto max-w-7xl px-8 py-24">
+		<div class="mb-12 text-center">
+			<p class="mb-2 font-medium text-primary">Supported hardware</p>
+			<h2 class="text-3xl font-bold tracking-tight lg:text-4xl">
+				Any LLRP reader today. More on the roadmap.
+			</h2>
+			<p class="mx-auto mt-4 max-w-3xl text-base-content/80">
+				The Pi 5 edge relay covers every LLRP reader in the field right now. The roadmap focuses on
+				readers with native MQTT so deployments can skip the edge device.
+			</p>
+		</div>
+
+		<h3 class="mb-6 flex items-center gap-2 text-xl font-semibold">
+			<span class="badge badge-success badge-lg">Supported today</span>
+		</h3>
+		<div class="mb-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+			{
+				supported.map((dev) => (
+					<div class="flex h-full flex-col overflow-hidden rounded-lg border border-base-content/10 bg-base-200">
+						{dev.image && (
+							<Image
+								src={dev.image}
+								alt={dev.alt ?? dev.name}
+								class="aspect-[4/3] w-full object-cover"
+								widths={[300, 600]}
+								sizes="(max-width: 640px) 100vw, 33vw"
+							/>
+						)}
+						<div class="flex flex-1 flex-col gap-2 p-6">
+							<h4 class="text-lg font-bold">{dev.name}</h4>
+							<p class="text-sm text-base-content/70">{dev.spec}</p>
+							<p class="mt-auto text-sm">{dev.integration}</p>
+						</div>
+					</div>
+				))
+			}
+		</div>
+
+		<h3 class="mb-6 flex items-center gap-2 text-xl font-semibold">
+			<span class="badge badge-warning badge-lg">On roadmap</span>
+			<span class="text-sm font-normal text-base-content/60"> Prioritized by partner demand </span>
+		</h3>
+		<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+			{
+				roadmap.map((dev) => (
+					<div class="rounded-lg border border-dashed border-base-content/20 p-5">
+						<h4 class="font-bold">{dev.name}</h4>
+						<p class="mt-1 text-sm text-base-content/70">{dev.note}</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

@@ -1,0 +1,37 @@
+---
+const lanes = [
+	{
+		title: 'Handheld · Web BLE',
+		flow: 'Browser → Web BLE → CS108 (or any supported BLE reader)',
+		body: 'A Bluetooth-capable browser talks directly to the handheld. Tags stream into the TrakRF web app; a Web Worker decodes the read stream so the UI stays responsive. No installs, no drivers, no support tickets for USB cables.'
+	},
+	{
+		title: 'Fixed · MQTT',
+		flow: 'LLRP reader → MQTT (direct or via Pi 5 edge relay) → Browser',
+		body: 'Fixed readers publish to MQTT — directly if the reader supports native MQTT, or through the TrakRF Pi 5 edge relay for LLRP-only hardware. The browser subscribes and renders reads through the same UI and data model as the handheld path.'
+	}
+];
+---
+
+<section id="how-it-works" class="bg-base-100">
+	<div class="mx-auto max-w-7xl px-8 py-24">
+		<div class="mb-12 text-center">
+			<p class="mb-2 font-medium text-primary">How it works</p>
+			<h2 class="text-3xl font-bold tracking-tight lg:text-4xl">
+				Two paths, one browser-based platform
+			</h2>
+		</div>
+
+		<div class="grid gap-8 md:grid-cols-2">
+			{
+				lanes.map((lane) => (
+					<div class="rounded-lg border border-base-content/10 bg-base-200 p-8">
+						<h3 class="text-xl font-bold">{lane.title}</h3>
+						<p class="mt-3 font-mono text-sm text-base-content/70">{lane.flow}</p>
+						<p class="mt-4 leading-relaxed">{lane.body}</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

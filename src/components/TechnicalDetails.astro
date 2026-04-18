@@ -1,0 +1,42 @@
+---
+const details = [
+	{
+		title: 'License',
+		body: 'Business Source License (BSL). Self-hosting is included. Commercial resale is governed by the partner agreement.'
+	},
+	{
+		title: 'Self-hosting',
+		body: 'Run the full stack on partner or customer infrastructure. No mandatory TrakRF-hosted dependency for operational data.'
+	},
+	{
+		title: 'API-first',
+		body: 'Every action in the web app is an API call. The same endpoints power TeamCentral-style integrations and third-party automation.'
+	},
+	{
+		title: 'Integration-ready',
+		body: 'MQTT, REST, and webhooks out of the box. Pair with Pi 5 edge relay to bridge LLRP readers and existing event buses.'
+	}
+];
+---
+
+<section class="bg-base-100">
+	<div class="mx-auto max-w-7xl px-8 py-24">
+		<div class="mb-12 text-center">
+			<p class="mb-2 font-medium text-primary">Technical details</p>
+			<h2 class="text-3xl font-bold tracking-tight lg:text-4xl">
+				Built for partners who need to ship
+			</h2>
+		</div>
+
+		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+			{
+				details.map((item) => (
+					<div class="rounded-lg border border-base-content/10 bg-base-200 p-6">
+						<h3 class="text-lg font-bold">{item.title}</h3>
+						<p class="mt-3 text-sm leading-relaxed opacity-80">{item.body}</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

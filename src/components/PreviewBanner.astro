@@ -9,31 +9,35 @@ const isPreview =
 
 // Array of silly Monty Python-esque messages
 const messages = [
-	"And now for something completely different... A PREVIEW BRANCH!",
+	'And now for something completely different... A PREVIEW BRANCH!',
 	"This is a PREVIEW branch. It's not pining, it's passed on!",
-	"Nobody expects the Spanish Inquisition! (Or this preview deployment)",
-	"Your mother was a hamster and your father smelt of elderberries! (This is preview.)",
+	'Nobody expects the Spanish Inquisition! (Or this preview deployment)',
+	'Your mother was a hamster and your father smelt of elderberries! (This is preview.)',
 	"This preview is an ex-parrot! No wait, it's very much alive!",
-	"We are the knights who say... PREVIEW!",
+	'We are the knights who say... PREVIEW!',
 	"It's only a model. (It's the preview branch.)",
-	"Strange women lying in ponds distributing swords is no basis for a system of government, but this preview branch is!",
+	'Strange women lying in ponds distributing swords is no basis for a system of government, but this preview branch is!'
 ];
 
 const randomMessage = messages[Math.floor(Math.random() * messages.length)];
 ---
 
-{isPreview && (
-	<>
-		<div class="preview-banner" id="preview-banner">
-			<div class="preview-banner-content">
-				<span class="preview-icon">🥥</span>
-				<span class="preview-text">{randomMessage}</span>
-				<span class="preview-icon">🦜</span>
+{
+	isPreview && (
+		<>
+			<div class="preview-banner" id="preview-banner">
+				<div class="preview-banner-content">
+					<span class="preview-icon">🥥</span>
+					<span class="preview-text">{randomMessage}</span>
+					<span class="preview-icon">🦜</span>
+				</div>
 			</div>
-		</div>
-		<div class="monty-foot" id="monty-foot">🦶</div>
-	</>
-)}
+			<div class="monty-foot" id="monty-foot">
+				🦶
+			</div>
+		</>
+	)
+}
 
 <style>
 	.preview-banner {
@@ -42,9 +46,20 @@ const randomMessage = messages[Math.floor(Math.random() * messages.length)];
 		left: 0;
 		right: 0;
 		z-index: 9999;
-		background: linear-gradient(45deg, #ff0000, #ff7700, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+		background: linear-gradient(
+			45deg,
+			#ff0000,
+			#ff7700,
+			#ffff00,
+			#00ff00,
+			#0000ff,
+			#4b0082,
+			#9400d3
+		);
 		background-size: 400% 400%;
-		animation: gradient 3s ease infinite, bounce 2s ease-in-out infinite;
+		animation:
+			gradient 3s ease infinite,
+			bounce 2s ease-in-out infinite;
 		padding: 0.75rem;
 		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 		border-bottom: 3px solid #000;
@@ -60,7 +75,11 @@ const randomMessage = messages[Math.floor(Math.random() * messages.length)];
 		font-weight: bold;
 		font-size: 1.1rem;
 		color: #000;
-		text-shadow: 2px 2px 0px #fff, -2px -2px 0px #fff, 2px -2px 0px #fff, -2px 2px 0px #fff;
+		text-shadow:
+			2px 2px 0px #fff,
+			-2px -2px 0px #fff,
+			2px -2px 0px #fff,
+			-2px 2px 0px #fff;
 	}
 
 	.preview-text {
@@ -86,7 +105,8 @@ const randomMessage = messages[Math.floor(Math.random() * messages.length)];
 	}
 
 	@keyframes bounce {
-		0%, 100% {
+		0%,
+		100% {
 			transform: translateY(0);
 		}
 		50% {
@@ -95,7 +115,8 @@ const randomMessage = messages[Math.floor(Math.random() * messages.length)];
 	}
 
 	@keyframes wiggle {
-		0%, 100% {
+		0%,
+		100% {
 			transform: rotate(-1deg);
 		}
 		50% {
