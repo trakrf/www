@@ -16,6 +16,7 @@ interface Device {
 	integration: string;
 	image: ImageMetadata | null;
 	alt: string | null;
+	url?: string;
 }
 
 const supported: Device[] = [
@@ -36,7 +37,7 @@ const supported: Device[] = [
 	{
 		name: 'Impinj Speedway R420',
 		spec: 'Fixed UHF · 4 antennas · LLRP',
-		integration: 'Via Pi 5 edge relay (in production on OMH)',
+		integration: 'Via TrakRF Edge Server (in production on OMH)',
 		image: null,
 		alt: null
 	},
@@ -48,11 +49,12 @@ const supported: Device[] = [
 		alt: null
 	},
 	{
-		name: 'Pi 5 edge server',
-		spec: 'TrakRF edge software on Raspberry Pi 5',
+		name: 'TrakRF Edge Server',
+		spec: 'LLRP → MQTT bridge · Raspberry Pi 5',
 		integration: 'Enables any LLRP reader today',
 		image: null,
-		alt: null
+		alt: null,
+		url: 'https://www.rfidready.net/trakrf-edgeserver'
 	},
 	{
 		name: 'Tag sample pack',
@@ -64,7 +66,7 @@ const supported: Device[] = [
 ];
 
 const roadmap = [
-	{ name: 'Impinj R700', note: 'Native MQTT — skip the edge relay' },
+	{ name: 'Impinj R700', note: 'Native MQTT — skip the edge server' },
 	{ name: 'Impinj xArray / later Speedway', note: 'Fixed UHF family' },
 	{ name: 'Chainway C72 / C66', note: 'Android handheld, BLE' },
 	{ name: 'TSL 1153 / 2166', note: 'BLE sled' },
@@ -80,8 +82,8 @@ const roadmap = [
 				Any LLRP reader today. More on the roadmap.
 			</h2>
 			<p class="mx-auto mt-4 max-w-3xl text-base-content/80">
-				The Pi 5 edge relay covers every LLRP reader in the field right now. The roadmap focuses on
-				readers with native MQTT so deployments can skip the edge device.
+				The TrakRF Edge Server covers every LLRP reader in the field right now. The roadmap focuses
+				on readers with native MQTT so deployments can skip the edge device.
 			</p>
 		</div>
 
@@ -90,24 +92,34 @@ const roadmap = [
 		</h3>
 		<div class="mb-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 			{
-				supported.map((dev) => (
-					<div class="flex h-full flex-col overflow-hidden rounded-lg border border-base-content/10 bg-base-200">
-						{dev.image && (
-							<Image
-								src={dev.image}
-								alt={dev.alt ?? dev.name}
-								class="aspect-[4/3] w-full object-cover"
-								widths={[300, 600]}
-								sizes="(max-width: 640px) 100vw, 33vw"
-							/>
-						)}
-						<div class="flex flex-1 flex-col gap-2 p-6">
-							<h4 class="text-lg font-bold">{dev.name}</h4>
-							<p class="text-sm text-base-content/70">{dev.spec}</p>
-							<p class="mt-auto text-sm">{dev.integration}</p>
-						</div>
-					</div>
-				))
+				supported.map((dev) => {
+					const Wrapper = dev.url ? 'a' : 'div';
+					const wrapperProps = dev.url
+						? { href: dev.url, target: '_blank', rel: 'noopener' }
+						: {};
+					const hoverClass = dev.url ? ' transition hover:border-primary' : '';
+					return (
+						<Wrapper
+							{...wrapperProps}
+							class={`flex h-full flex-col overflow-hidden rounded-lg border border-base-content/10 bg-base-200${hoverClass}`}
+						>
+							{dev.image && (
+								<Image
+									src={dev.image}
+									alt={dev.alt ?? dev.name}
+									class="aspect-[4/3] w-full object-cover"
+									widths={[300, 600]}
+									sizes="(max-width: 640px) 100vw, 33vw"
+								/>
+							)}
+							<div class="flex flex-1 flex-col gap-2 p-6">
+								<h4 class="text-lg font-bold">{dev.name}</h4>
+								<p class="text-sm text-base-content/70">{dev.spec}</p>
+								<p class="mt-auto text-sm">{dev.integration}</p>
+							</div>
+						</Wrapper>
+					);
+				})
 			}
 		</div>
 
